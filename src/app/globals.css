@@ -1,4 +1,5 @@
 @import "tailwindcss";
+@import url('https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000&family=DM+Serif+Display:ital@0;1&display=swap');
 
 @theme {
   --color-primary:              #0BABA6;
@@ -12,7 +13,7 @@
   --color-muted:                #7A8480;
 
   /* DM Sans as the default sans */
-  --font-sans: var(--font-dm-sans), ui-sans-serif, system-ui, sans-serif;
+  --font-sans: 'DM Sans', ui-sans-serif, system-ui, sans-serif;
 }
 
 :root {
@@ -22,7 +23,7 @@
 
 /* ── Display font class ──────────────────────────────────────── */
 .font-display {
-  font-family: var(--font-dm-serif), Georgia, 'Times New Roman', serif;
+  font-family: 'DM Serif Display', Georgia, 'Times New Roman', serif;
 }
 
 /* ── Keyframes ────────────────────────────────────────────────── */
@@ -41,7 +42,7 @@ html  { scroll-behavior: smooth; }
 body {
   background: var(--background);
   color: var(--foreground);
-  font-family: var(--font-dm-sans), ui-sans-serif, system-ui, sans-serif;
+  font-family: 'DM Sans', ui-sans-serif, system-ui, sans-serif;
   overflow-x: hidden;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;

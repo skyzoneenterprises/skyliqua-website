@@ -4,19 +4,6 @@ import "./globals.css";
 import { cn } from "@/lib/utils";
 import { WhatsAppBubble } from "@/components/ui/WhatsAppBubble";
 
-const dmSerif = DM_Serif_Display({
-  variable: "--font-dm-serif",
-  subsets: ["latin"],
-  weight: "400",
-  display: "swap",
-});
-
-const dmSans = DM_Sans({
-  variable: "--font-dm-sans",
-  subsets: ["latin"],
-  display: "swap",
-});
-
 export const metadata: Metadata = {
   title: "Skyliqua | Premium Water Purifiers",
   description:
@@ -27,7 +14,7 @@ export default function RootLayout({
   children,
 }: Readonly<{ children: React.ReactNode }>) {
   return (
-    <html lang="en" className={cn(dmSerif.variable, dmSans.variable, "h-full antialiased")}>
+    <html lang="en" className="h-full antialiased">
       <body className="min-h-full flex flex-col bg-background text-foreground overflow-x-hidden">
         {children}
         <WhatsAppBubble />
