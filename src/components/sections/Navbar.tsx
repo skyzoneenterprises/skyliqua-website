@@ -35,7 +35,7 @@ export function Navbar() {
       <div className="w-full max-w-[1360px] mx-auto px-5 sm:px-8 lg:px-16 flex items-center justify-between">
 
         {/* Logo */}
-        <Link href="/" className="relative flex-shrink-0 w-36 h-9">
+        <Link href="/" className="relative flex-shrink-0 w-44 h-12">
           <Image src="/assets/brand/skyliqua-logo-clean.png" alt="Skyliqua" fill className="object-contain object-left" priority />
         </Link>
 

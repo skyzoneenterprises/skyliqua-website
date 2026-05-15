@@ -1,10 +1,20 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect, Suspense } from "react";
 import { motion } from "framer-motion";
+import { useSearchParams } from "next/navigation";
 
-export function CtaSection() {
+function CtaFormContent() {
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const searchParams = useSearchParams();
+  const [selectedModel, setSelectedModel] = useState("unspecified");
+
+  useEffect(() => {
+    const model = searchParams.get("model");
+    if (model) {
+      setSelectedModel(model);
+    }
+  }, [searchParams]);
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
@@ -73,7 +83,7 @@ export function CtaSection() {
                   style={{ width: "100%", padding: "14px 20px", borderRadius: "4px", border: "1px solid rgba(12,15,13,0.1)", background: "#f8f7f4", fontSize: "1rem", color: "#0C0F0D", outline: "none", transition: "all 0.2s ease" }}
                   onFocus={e => { e.currentTarget.style.border = "1px solid #0BABA6"; e.currentTarget.style.background = "#ffffff"; }}
                   onBlur={e => { e.currentTarget.style.border = "1px solid rgba(12,15,13,0.1)"; e.currentTarget.style.background = "#f8f7f4"; }}
-                  placeholder="John Doe"
+                  placeholder="Rahul Sharma"
                 />
               </div>
 
@@ -97,6 +107,24 @@ export function CtaSection() {
                   onBlur={e => { e.currentTarget.style.border = "1px solid rgba(12,15,13,0.1)"; e.currentTarget.style.background = "#f8f7f4"; }}
                   placeholder="e.g. Mumbai"
                 />
+              </div>
+
+              <div style={{ display: "flex", flexDirection: "column", gap: "8px" }}>
+                <label htmlFor="model" style={{ fontSize: "0.875rem", fontWeight: 500, color: "rgba(12,15,13,0.7)" }}>Product of Interest</label>
+                <select
+                  id="model" value={selectedModel} onChange={e => setSelectedModel(e.target.value)}
+                  style={{ width: "100%", padding: "14px 20px", borderRadius: "4px", border: "1px solid rgba(12,15,13,0.1)", background: "#f8f7f4", fontSize: "1rem", color: "#0C0F0D", outline: "none", transition: "all 0.2s ease", cursor: "pointer" }}
+                  onFocus={e => { e.currentTarget.style.border = "1px solid #0BABA6"; e.currentTarget.style.background = "#ffffff"; }}
+                  onBlur={e => { e.currentTarget.style.border = "1px solid rgba(12,15,13,0.1)"; e.currentTarget.style.background = "#f8f7f4"; }}
+                >
+                  <option value="unspecified">Not sure yet / Need consultation</option>
+                  <option value="prime">Skyliqua Prime (9-Stage)</option>
+                  <option value="zen">Skyliqua Zen (Alkaline)</option>
+                  <option value="elite">Skyliqua Elite (Smart LED)</option>
+                </select>
+                <div style={{ position: "absolute", right: "20px", top: "50%", transform: "translateY(-50%)", pointerEvents: "none" }}>
+                  {/* The select caret isn't strictly necessary with appearance:none if we add a custom svg, but we can keep it simple or remove appearance:none on Windows */}
+                </div>
               </div>
 
               <button
@@ -123,5 +151,13 @@ export function CtaSection() {
         </motion.div>
       </div>
     </section>
+  );
+}
+
+export function CtaSection() {
+  return (
+    <Suspense fallback={<div style={{ padding: "100px", textAlign: "center" }}>Loading...</div>}>
+      <CtaFormContent />
+    </Suspense>
   );
 }

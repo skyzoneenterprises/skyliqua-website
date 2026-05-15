@@ -19,7 +19,7 @@ export function WhatsAppBubble() {
       }}
     >
       <a
-        href="https://wa.me/1234567890" // User can replace with real number
+        href="https://wa.me/919483548853" // Updated WhatsApp number
         target="_blank"
         rel="noopener noreferrer"
         style={{

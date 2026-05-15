@@ -33,7 +33,7 @@ def extract_colors(path):
         print("Error extracting colors:", e)
 
 if __name__ == "__main__":
-    pdf_path = "Comparision doc.pdf"
+    pdf_path = "public/docs/Comparision doc.pdf"
     docx_path = "skyliqua.docx"
     jpg_path = "color-scheme.jpeg"
     

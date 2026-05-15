@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import "./globals.css";
 import { cn } from "@/lib/utils";
 import { WhatsAppBubble } from "@/components/ui/WhatsAppBubble";
+import { CallbackPopup } from "@/components/ui/CallbackPopup";
 
 export const metadata: Metadata = {
   title: "Skyliqua | Premium Water Purifiers",
@@ -22,6 +23,7 @@ export default function RootLayout({
       <body className="min-h-full flex flex-col bg-background text-foreground overflow-x-hidden">
         {children}
         <WhatsAppBubble />
+        <CallbackPopup />
       </body>
     </html>
   );

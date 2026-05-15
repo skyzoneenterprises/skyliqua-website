@@ -130,9 +130,11 @@ export function HeroSection() {
           <motion.div style={{ y:imgY }} className="absolute inset-[4%_8%] flex items-center justify-center">
             <div className="absolute bottom-[5%] left-[15%] right-[15%] h-7 rounded-full pointer-events-none" style={{ background:"rgba(0,0,0,0.07)", filter:"blur(22px)" }} />
             <motion.div initial={{ opacity:0, scale:0.92, y:20 }} animate={{ opacity:1, scale:1, y:0 }} transition={{ duration:1.1, delay:0.18, ease:"easeOut" }} className="relative w-full h-full">
-              <motion.div animate={{ y:[0,-18,0] }} transition={{ duration:5.5, repeat:Infinity, ease:"easeInOut", delay:1.2 }} className="absolute inset-0">
+              <motion.div animate={{ y:[0,-18,0] }} transition={{ duration:5.5, repeat:Infinity, ease:"easeInOut", delay:1.2 }} 
+                whileHover={{ scale: 1.08 }}
+                className="absolute inset-0 cursor-pointer">
                 <Image src="/assets/products/elite-removed.png" alt="Skyliqua Elite Water Purifier"
-                  fill className="object-contain" priority
+                  fill className="object-contain transition-transform duration-500 ease-out" priority
                   style={{ filter:"drop-shadow(0 44px 88px rgba(0,0,0,0.16))" }}
                   sizes="54vw" />
               </motion.div>

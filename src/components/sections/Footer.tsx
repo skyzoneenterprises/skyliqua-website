@@ -14,9 +14,8 @@ export function Footer() {
 
           {/* Brand */}
           <div className="sm:col-span-2 lg:col-span-1">
-            <div className="relative w-36 h-9 mb-6">
-              <Image src="/assets/brand/skyliqua-logo-clean.png" alt="Skyliqua" fill className="object-contain object-left"
-                style={{ filter:"brightness(0) invert(1)" }} />
+            <div className="relative w-64 h-20 mb-6 -ml-3">
+              <Image src="/assets/brand/skyliqua-logo-clean.png" alt="Skyliqua" fill className="object-contain object-left" />
             </div>
             <p className="text-sm leading-relaxed font-light mb-6 max-w-xs" style={{ color:"rgba(255,255,255,0.35)" }}>
               Advanced 12-stage Puresense purification, enriched with copper and alkaline goodness. Life-long care for your family's health.
@@ -82,6 +81,16 @@ export function Footer() {
                 <span className="text-sm font-light leading-relaxed whitespace-pre-line" style={{ color:"rgba(255,255,255,0.42)" }}>{text}</span>
               </div>
             ))}
+            
+            <div className="mt-8">
+              <div className="text-[10px] font-bold tracking-[0.22em] uppercase mb-3" style={{ color:"rgba(255,255,255,0.3)" }}>Additional Info</div>
+              <p className="text-sm font-light mb-2" style={{ color:"rgba(255,255,255,0.42)" }}>
+                pH Information: <strong style={{ color: "#0BABA6" }}>7.5 to 8.5</strong>
+              </p>
+              <p className="text-xs font-light leading-relaxed mt-3" style={{ color:"rgba(255,255,255,0.35)", paddingLeft: "10px", borderLeft: "2px solid #0BABA6" }}>
+                We provide services as well. If you want to check your existing filter, <a href="#contact" className="underline hover:text-white transition-colors">connect with us</a>.
+              </p>
+            </div>
           </div>
         </div>
 

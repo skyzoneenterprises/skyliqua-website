@@ -3,7 +3,7 @@
 import { useState } from "react";
 import Image from "next/image";
 import { motion, AnimatePresence, type Variants } from "framer-motion";
-import { Check } from "lucide-react";
+import { Check, ZoomIn, X } from "lucide-react";
 
 const PRODUCTS = [
   {
@@ -12,9 +12,9 @@ const PRODUCTS = [
     image:"/assets/products/prime-removed.png",
     isElite:false, badge:"Best Value", accentColor:"#0BABA6",
     oval:"radial-gradient(ellipse 85% 80% at 50% 48%, rgba(11,171,166,0.09) 0%, rgba(226,244,242,0.9) 55%, #E8F3F2 100%)",
-    features:["12-Stage Puresense Purification","Copper-Infused Chamber","10 L Insulated Storage Tank","RO + UV + UF Technology","TDS Controller Included","Sediment & Carbon Pre-Filters"],
+    features:["9-Stage Puresense Purification","Copper-Infused Chamber","10 L Insulated Storage Tank","RO Technology","TDS Controller Included","Sediment & Carbon Pre-Filters"],
     description:"The Prime delivers our core Puresense Technology in its most refined form. Copper-enriched and rigorously filtered — built for families who take health seriously.",
-    specs:[{l:"Stages",v:"12"},{l:"Storage",v:"10 L"},{l:"Copper",v:"✓"},{l:"Alkaline",v:"—"},{l:"LED",v:"—"}],
+    specs:[{l:"Stages",v:"9"},{l:"Storage",v:"10 L"},{l:"Copper",v:"✓"},{l:"Alkaline",v:"—"},{l:"LED",v:"—"}],
   },
   {
     id:"zen", label:"Zen", name:"Skyliqua Zen",
@@ -43,10 +43,35 @@ const itemV: Variants = { hidden:{ opacity:0, x:-10 }, show:{ opacity:1, x:0, tr
 
 export function ProductShowcase() {
   const [activeId, setActiveId] = useState("prime");
+  const [zoomedImage, setZoomedImage] = useState<string | null>(null);
   const p = PRODUCTS.find(x => x.id === activeId)!;
 
   return (
     <section id="products" className="flex flex-col bg-white" style={{ minHeight:"100dvh" }}>
+
+      {/* Zoom Modal */}
+      <AnimatePresence>
+        {zoomedImage && (
+          <motion.div 
+            initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}
+            className="fixed inset-0 z-[200] flex items-center justify-center p-4 sm:p-10"
+            style={{ background: "rgba(12,15,13,0.9)", backdropFilter: "blur(8px)" }}
+            onClick={() => setZoomedImage(null)}
+          >
+            <button className="absolute top-6 right-6 p-2 rounded-full bg-white/10 hover:bg-white/20 transition-colors text-white">
+              <X size={24} />
+            </button>
+            <motion.div 
+              initial={{ scale: 0.9, opacity: 0 }} animate={{ scale: 1, opacity: 1 }} exit={{ scale: 0.9, opacity: 0 }}
+              transition={{ type: "spring", damping: 25, stiffness: 300 }}
+              className="relative w-full max-w-4xl max-h-[90vh] aspect-square sm:aspect-video"
+              onClick={e => e.stopPropagation()}
+            >
+              <Image src={zoomedImage} alt="Zoomed Product" fill className="object-contain" sizes="100vw" />
+            </motion.div>
+          </motion.div>
+        )}
+      </AnimatePresence>
 
       {/* Header */}
       <div className="px-5 sm:px-8 lg:px-20 pt-10 sm:pt-12 lg:pt-14 flex-shrink-0">
@@ -97,10 +122,19 @@ export function ProductShowcase() {
               <div className="absolute bottom-[6%] left-[18%] right-[18%] h-5 rounded-full pointer-events-none"
                 style={{ background:"rgba(0,0,0,0.05)", filter:"blur(14px)", zIndex:1 }} />
               <motion.div animate={{ y:[0,-12,0] }} transition={{ duration:4.5, repeat:Infinity, ease:"easeInOut" }}
-                className="absolute inset-[6%] z-10">
-                <Image src={p.image} alt={p.name} fill className="object-contain"
+                whileHover={{ scale: 1.05 }}
+                onClick={() => setZoomedImage(p.image)}
+                className="absolute inset-[6%] z-10 cursor-pointer group">
+                <Image src={p.image} alt={p.name} fill className="object-contain transition-transform duration-500 ease-out"
                   style={{ filter:"drop-shadow(0 18px 40px rgba(0,0,0,0.06))" }}
                   sizes="(max-width: 1024px) 90vw, 50vw" />
+                
+                {/* Zoom Icon Overlay */}
+                <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none">
+                  <div className="bg-white/80 backdrop-blur-sm p-3 rounded-full shadow-lg">
+                    <ZoomIn size={24} color={p.accentColor} />
+                  </div>
+                </div>
               </motion.div>
             </div>
 
@@ -140,7 +174,7 @@ export function ProductShowcase() {
                       </div>
                     ))}
                   </div>
-                  <a href="#contact"
+                  <a href={`?model=${p.id}#contact`}
                     className="flex items-center justify-center w-full py-4 rounded-sm font-semibold text-sm tracking-wide text-white transition-all duration-200 hover:opacity-90 active:scale-[0.98]"
                     style={{ background:p.isElite?"#C8A84B":"#0BABA6" }}>
                     Enquire About {p.label}
