@@ -49,8 +49,7 @@ export function HeroSection() {
           <div className="relative z-10">
             {/* Eyebrow */}
             <motion.div initial={{ opacity:0, x:-12 }} animate={{ opacity:1, x:0 }} transition={{ duration:0.55 }}
-              className="flex items-center gap-3 mb-5 lg:mb-8">
-              <div className="w-7 h-px flex-shrink-0" style={{ background:"#0BABA6" }} />
+              className="mb-5 lg:mb-8">
               <span className="text-[9px] sm:text-[10px] font-semibold uppercase tracking-[0.26em]" style={{ color:"#0BABA6" }}>
                 Skyliqua · Puresense Technology
               </span>
