@@ -72,7 +72,7 @@ export function Footer() {
           <div>
             <div className="text-[10px] font-bold tracking-[0.22em] uppercase mb-5" style={{ color:"rgba(255,255,255,0.3)" }}>Contact</div>
             {[
-              { icon:Phone, text:"1800-XXX-XXXX" },
+              { icon:Phone, text:"+91 9483548853" },
               { icon:Mail,  text:"support@skyliqua.com" },
               { icon:MapPin,text:"123 Pure Water Avenue,\nTech Park, City — 400001" },
             ].map(({ icon:Icon, text }) => (
@@ -101,13 +101,13 @@ export function Footer() {
             © {new Date().getFullYear()} Skyliqua. All rights reserved.
           </p>
           <div className="flex gap-6">
-            {["Privacy Policy","Terms of Service"].map(t => (
-              <Link key={t} href="#"
+            {[{label:"Privacy Policy",href:"/privacy"},{label:"Terms of Service",href:"/terms"}].map(t => (
+              <Link key={t.href} href={t.href}
                 className="text-xs font-light transition-colors duration-200"
                 style={{ color:"rgba(255,255,255,0.25)" }}
                 onMouseEnter={e=>{ (e.currentTarget as HTMLElement).style.color="#0BABA6"; }}
                 onMouseLeave={e=>{ (e.currentTarget as HTMLElement).style.color="rgba(255,255,255,0.25)"; }}>
-                {t}
+                {t.label}
               </Link>
             ))}
           </div>
