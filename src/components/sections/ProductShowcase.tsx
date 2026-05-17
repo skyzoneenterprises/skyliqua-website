@@ -73,7 +73,7 @@ export function ProductShowcase() {
         )}
       </AnimatePresence>
 
-      <div className="w-full max-w-[1200px] px-5 sm:px-8 lg:px-12 flex flex-col flex-1 min-h-0">
+      <div className="w-full max-w-[1200px] px-5 sm:px-8 lg:px-12 flex flex-col flex-1 lg:min-h-0">
         
         {/* Header & Tabs (Side-by-side on desktop to save vertical space) */}
         <div className="flex flex-col md:flex-row items-center justify-between mb-6 sm:mb-8 gap-5">
@@ -102,12 +102,12 @@ export function ProductShowcase() {
         </div>
 
         {/* Main Panel (Fills remaining height if necessary) */}
-        <div className="w-full flex flex-col flex-1 min-h-0 relative">
+        <div className="w-full flex flex-col flex-1 lg:min-h-0 relative">
           <AnimatePresence mode="wait">
             <motion.div key={activeId}
               initial={{ opacity:0, y:15 }} animate={{ opacity:1, y:0 }} exit={{ opacity:0, y:-15 }}
               transition={{ duration:0.35, ease:"easeOut" }}
-              className="absolute inset-0 w-full h-full bg-white rounded-3xl overflow-hidden shadow-[0_20px_50px_rgba(0,0,0,0.05)] border border-[rgba(12,15,13,0.03)] flex flex-col lg:flex-row">
+              className="relative lg:absolute lg:inset-0 w-full lg:h-full bg-white rounded-3xl overflow-hidden shadow-[0_20px_50px_rgba(0,0,0,0.05)] border border-[rgba(12,15,13,0.03)] flex flex-col lg:flex-row">
               
               {/* Image Side */}
               <div className="relative w-full lg:w-[45%] flex items-center justify-center p-6 sm:p-8 min-h-[280px] lg:min-h-0"
@@ -133,7 +133,7 @@ export function ProductShowcase() {
               </div>
 
               {/* Content Side */}
-              <div className="w-full lg:w-[55%] p-6 sm:p-8 lg:p-12 flex flex-col justify-center bg-white h-full overflow-y-auto">
+              <div className="w-full lg:w-[55%] p-6 sm:p-8 lg:p-12 flex flex-col justify-center bg-white lg:h-full lg:overflow-y-auto">
                 <p className="text-[9px] sm:text-[10px] font-bold tracking-[0.25em] uppercase mb-1.5" style={{ color:p.accentColor }}>{p.tagline}</p>
                 <h3 className="font-display font-bold mb-3" style={{ fontSize:"clamp(1.8rem,3vw,2.5rem)", color:"#0C0F0D", lineHeight:1.1, letterSpacing:"-0.02em" }}>
                   {p.name}
@@ -141,7 +141,7 @@ export function ProductShowcase() {
                 <p className="text-[13px] sm:text-[14px] leading-relaxed font-light mb-6" style={{ color:"rgba(12,15,13,0.6)" }}>{p.description}</p>
 
                 <motion.ul key={activeId+"fl"} variants={listV} initial="hidden" animate="show"
-                  className="space-y-2.5 mb-8 list-none m-0 p-0 flex-1 min-h-0">
+                  className="space-y-2.5 mb-8 list-none m-0 p-0 lg:flex-1 lg:min-h-0">
                   {p.features.map(f => (
                     <motion.li key={f} variants={itemV} className="flex items-start gap-3">
                       <span className="flex-shrink-0 mt-0.5 w-4 h-4 rounded-full flex items-center justify-center shadow-sm"
