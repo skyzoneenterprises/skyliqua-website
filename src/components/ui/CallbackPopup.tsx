@@ -53,7 +53,7 @@ export function CallbackPopup() {
             <Phone size={22} color="#0BABA6" />
           </div>
 
-          <h3 className="font-display text-xl font-bold mb-2" style={{ color: "#0C0F0D" }}>
+          <h3 className="font-serif text-xl font-bold mb-2" style={{ color: "#0C0F0D" }}>
             Talk with an expert now!
           </h3>
           <p className="text-sm leading-relaxed font-light mb-6" style={{ color: "rgba(12,15,13,0.6)" }}>

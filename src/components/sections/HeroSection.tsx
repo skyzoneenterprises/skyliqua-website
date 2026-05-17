@@ -5,126 +5,141 @@ import { useRef } from "react";
 import { motion, useScroll, useTransform } from "framer-motion";
 
 const EASE = [0.16, 1, 0.3, 1] as const;
-const MARQUEE = [
-  "12-Stage Puresense","Copper Enrichment","Alkaline Balance","Smart LED Monitor",
-  "RO · UV · UF","Life-Long Service","pH 7.5–9.5","Ayurvedic Wellness","99.9% Purity","Auto-Sanitisation",
-];
-const STRIP = [...MARQUEE, ...MARQUEE];
 
 export function HeroSection() {
   const ref = useRef<HTMLElement>(null);
   const { scrollYProgress } = useScroll({ target: ref, offset: ["start start", "end start"] });
-  const imgY = useTransform(scrollYProgress, [0, 1], [0, -50]);
+  
+  // Cinematic parallax effects
+  const bgY = useTransform(scrollYProgress, [0, 1], [0, 120]);
+  const productY = useTransform(scrollYProgress, [0, 1], [0, -60]);
+  const textY = useTransform(scrollYProgress, [0, 1], [0, 90]);
 
   return (
-    <section ref={ref} className="relative flex flex-col items-center overflow-hidden bg-white" style={{ minHeight: "100dvh", paddingTop: "72px" }}>
+    <section ref={ref} className="relative w-full overflow-hidden bg-[#021411]" style={{ minHeight: "100dvh" }}>
       
-      {/* Marble Background Image */}
-      <div className="absolute inset-0 z-0">
-        <Image src="/assets/hero-bg.jpg" alt="Marble Background" fill className="object-cover" priority quality={100} />
-      </div>
-      
-      {/* Light Gradient Overlay to ensure text readability */}
-      <div className="absolute inset-0 z-0 bg-gradient-to-r from-white/70 via-white/40 to-transparent pointer-events-none" />
+      {/* =========================================
+          BACKGROUND: Cinematic Marble Canvas
+          ========================================= */}
+      <motion.div style={{ y: bgY }} className="absolute inset-0 z-0">
+        <Image 
+          src="/assets/hero-bg.jpeg" 
+          alt="Luxury Marble Canvas" 
+          fill 
+          className="object-cover object-center scale-[1.05] saturate-[0.85] contrast-[1.05] brightness-[0.9]" 
+          priority 
+          quality={100} 
+        />
+      </motion.div>
 
-      {/* Main Content Container */}
-      <div className="relative z-10 w-full max-w-[1440px] flex-1 flex flex-col lg:flex-row items-center justify-between px-6 sm:px-10 md:px-14 lg:px-20 py-12 lg:py-0">
+      {/* =========================================
+          MASK: Deep Cinematic Vignette & Blur
+          ========================================= */}
+      {/* Heavy dark vignette to focus the center and frame the product */}
+      <div className="absolute inset-0 z-0 pointer-events-none bg-[radial-gradient(ellipse_at_center,transparent_0%,rgba(2,20,17,0.7)_100%)]" />
+      
+      {/* Targeted extremely soft blur for text readability */}
+      <div 
+        className="hidden lg:block absolute inset-0 z-0 pointer-events-none" 
+        style={{
+          background: "linear-gradient(to right, rgba(250,250,248,0.92) 0%, rgba(250,250,248,0.5) 45%, rgba(250,250,248,0) 70%)",
+          backdropFilter: "blur(30px)",
+          WebkitBackdropFilter: "blur(30px)",
+          maskImage: "linear-gradient(to right, black 30%, transparent 70%)",
+          WebkitMaskImage: "linear-gradient(to right, black 30%, transparent 70%)"
+        }} 
+      />
+
+      <div 
+        className="block lg:hidden absolute inset-0 z-0 pointer-events-none" 
+        style={{
+          background: "linear-gradient(to bottom, rgba(250,250,248,0.95) 0%, rgba(250,250,248,0.7) 45%, rgba(250,250,248,0) 75%)",
+          backdropFilter: "blur(24px)",
+          WebkitBackdropFilter: "blur(24px)",
+          maskImage: "linear-gradient(to bottom, black 30%, transparent 75%)",
+          WebkitMaskImage: "linear-gradient(to bottom, black 30%, transparent 75%)"
+        }} 
+      />
+
+
+      <div className="relative z-10 w-full h-full min-h-[100dvh] flex flex-col lg:flex-row">
         
-        {/* LEFT / TOP — Typography & CTAs */}
-        <div className="flex-1 w-full lg:max-w-[50%] flex flex-col justify-center mt-4 lg:mt-0">
-          
-          <div className="mb-4 lg:mb-6">
-            <div className="overflow-hidden pb-4 -mb-4">
-              <motion.h1 initial={{ y:"110%" }} animate={{ y:0 }} transition={{ duration:1.0, ease:EASE }}
-                className="font-display m-0 font-bold"
-                style={{ color:"#041D1A", fontSize:"clamp(2.8rem,5.5vw,5.5rem)", lineHeight:1.05, letterSpacing:"-0.02em", textTransform:"uppercase" }}>
-                Skyliqua<br/>Water Purifiers
+        {/* =========================================
+            LEFT SIDE: Sculptural Typography
+            ========================================= */}
+        <motion.div style={{ y: textY }} className="w-full lg:w-[50%] flex flex-col justify-center px-8 sm:px-12 lg:pl-[12%] lg:pr-12 pt-40 lg:pt-0 pb-16 lg:pb-0">
+          <div className="w-full max-w-[540px] mx-auto lg:mx-0">
+            
+            {/* Logo */}
+            <div className="mb-12 relative z-10 w-full max-w-[300px] lg:max-w-[340px] h-[80px] lg:h-[90px] -ml-2">
+              <motion.div initial={{ opacity:0, y:20 }} animate={{ opacity:1, y:0 }} transition={{ duration:1.0, ease:EASE }} className="relative w-full h-full">
+                <Image src="/assets/brand/skyliqua-logo-clean.png" alt="Skyliqua" fill className="object-contain object-left" priority />
+              </motion.div>
+            </div>
+
+            {/* Monumental Headline */}
+            <div className="overflow-hidden mb-6">
+              <motion.h1 initial={{ y:"110%" }} animate={{ y:0 }} transition={{ duration:1.2, ease:EASE, delay: 0.1 }}
+                className="font-serif m-0 font-medium tracking-tight leading-none"
+                style={{ color:"#031815", fontSize:"clamp(3.8rem, 6.5vw, 7rem)" }}>
+                Pure Water.<br/>
+                <span className="italic" style={{ color:"#AC885B", fontWeight: 400 }}>Beautifully Refined.</span>
               </motion.h1>
             </div>
+
+            {/* Minimal Copy */}
+            <motion.p initial={{ opacity:0, y:12 }} animate={{ opacity:1, y:0 }} transition={{ duration:0.8, delay: 0.3 }}
+              className="text-base lg:text-lg tracking-wide mb-12 max-w-[420px] font-sans"
+              style={{ color:"rgba(3,24,21,0.65)", lineHeight: 1.6 }}>
+              A statement of absolute luxury for the modern home. Impeccable 12-stage purification wrapped in sculptural elegance.
+            </motion.p>
+
+            {/* Single Premium CTA */}
+            <motion.div initial={{ opacity:0, y:12 }} animate={{ opacity:1, y:0 }} transition={{ duration:0.8, delay: 0.4 }}>
+              <a href="#products"
+                className="inline-flex items-center justify-center rounded-full font-bold tracking-[0.2em] uppercase transition-all duration-500 hover:bg-[#222222] hover:shadow-[0_10px_40px_rgba(0,0,0,0.15)] group"
+                style={{ padding:"16px 42px", background:"#0F0F0F", color:"#FFFFFF", fontSize:"10px" }}>
+                Explore Collection
+              </a>
+            </motion.div>
           </div>
-
-          <motion.div initial={{ scaleX:0 }} animate={{ scaleX:1 }} transition={{ duration:0.8, delay:0.3, ease:"easeOut" }}
-            className="h-px mb-4 lg:mb-6 w-16" style={{ background:"#AC885B", transformOrigin:"left" }} />
-
-          <motion.p initial={{ opacity:0, y:12 }} animate={{ opacity:1, y:0 }} transition={{ duration:0.7, delay:0.4 }}
-            className="text-lg lg:text-xl font-medium tracking-wide mb-8 lg:mb-12"
-            style={{ color:"#AC885B" }}>
-            Pure Water. Pure Life.
-          </motion.p>
-
-          <motion.div initial={{ opacity:0, y:12 }} animate={{ opacity:1, y:0 }} transition={{ duration:0.7, delay:0.5 }}
-            className="flex flex-wrap items-center gap-5 lg:gap-8 mb-12 lg:mb-0">
-            <a href="#products"
-              className="inline-flex items-center gap-3 rounded-sm font-bold tracking-wide transition-all duration-300 hover:opacity-90 active:scale-95 group"
-              style={{ padding:"16px 32px", background:"#041D1A", color:"#FFFFFF", fontSize:"13px", textTransform:"uppercase" }}>
-              Explore Collection
-              <svg className="transition-transform group-hover:translate-x-1" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><path d="m9 18 6-6-6-6"/></svg>
-            </a>
-            <a href="#puresense" className="text-[13px] font-bold tracking-wide uppercase transition-colors hover:text-[#041D1A]"
-              style={{ color:"rgba(4,29,26,0.5)" }}>
-              How it works
-            </a>
-          </motion.div>
-        </div>
-
-        {/* RIGHT / BOTTOM — Product Image */}
-        <div className="flex-1 w-full lg:h-full relative flex items-center justify-center lg:justify-end mt-4 lg:mt-0 min-h-[350px] lg:min-h-0">
-          <motion.div style={{ y:imgY }} className="relative w-full max-w-[320px] lg:max-w-[480px] aspect-[4/5] lg:aspect-square flex items-center justify-center">
-            
-            <motion.div initial={{ opacity:0, scale:0.92, y:20 }} animate={{ opacity:1, scale:1, y:0 }} transition={{ duration:1.2, delay:0.2, ease:"easeOut" }} className="relative w-full h-full">
-              <motion.div animate={{ y:[0,-15,0] }} transition={{ duration:6, repeat:Infinity, ease:"easeInOut" }}
-                className="absolute inset-0 cursor-pointer">
-                <Image src="/assets/products/elite-removed.png" alt="Skyliqua Elite Water Purifier"
-                  fill className="object-contain transition-transform duration-700 ease-out hover:scale-105" priority
-                  style={{ filter:"drop-shadow(0 40px 60px rgba(4,29,26,0.15))" }}
-                  sizes="(max-width: 1024px) 320px, 480px" />
-              </motion.div>
-            </motion.div>
-
-            {/* Floating Tags (Desktop Only) */}
-            <motion.div initial={{ opacity:0, x:20 }} animate={{ opacity:1, x:0 }} transition={{ duration:0.6, delay:1.2 }}
-              className="hidden lg:flex absolute top-10 right-0 items-center gap-3 backdrop-blur-md"
-              style={{ background:"rgba(255,255,255,0.7)", border:"1px solid rgba(172,136,91,0.2)", padding:"8px 16px", borderRadius:"100px", boxShadow:"0 10px 30px rgba(4,29,26,0.05)" }}>
-              <div className="w-1.5 h-1.5 rounded-full" style={{ background:"#AC885B" }} />
-              <span className="text-[10px] font-bold tracking-[0.2em] uppercase text-[#041D1A]">Marble White & Black Gold</span>
-            </motion.div>
-          </motion.div>
-        </div>
-
-      </div>
-
-      {/* Stats at bottom (Overlaid on the light background) */}
-      <div className="relative z-20 w-full max-w-[1440px] px-6 sm:px-10 md:px-14 lg:px-20 pb-10 lg:pb-12">
-        <motion.div initial={{ opacity:0, y:20 }} animate={{ opacity:1, y:0 }} transition={{ duration:0.8, delay:0.6 }}
-          className="grid grid-cols-2 md:grid-cols-4 gap-8 md:gap-4 pt-8"
-          style={{ borderTop:"1px solid rgba(4,29,26,0.1)" }}>
-          {[
-            { title:"Filtration", sub:"Advanced" },
-            { title:"Protection", sub:"Multiple" },
-            { title:"Recovery",   sub:"High Water" },
-            { title:"Eco-Friendly", sub:"Healthy &" },
-          ].map((s, i) => (
-            <div key={s.title} className={`${i>0 && "md:border-l"} md:pl-6`} style={{ borderColor:"rgba(4,29,26,0.08)" }}>
-              <div className="font-display text-2xl lg:text-3xl mb-1.5 font-bold" style={{ color:"#041D1A" }}>{s.title}</div>
-              <div className="text-[10px] lg:text-xs font-bold tracking-[0.1em] uppercase" style={{ color:"#AC885B" }}>{s.sub}</div>
-            </div>
-          ))}
         </motion.div>
-      </div>
 
-      {/* Marquee strip - absolute bottom */}
-      <div className="w-full relative z-20 flex-shrink-0 flex items-center overflow-hidden"
-        style={{ height:"44px", background:"#041D1A", borderTop:"1px solid rgba(255,255,255,0.04)" }}>
-        <div className="animate-marquee flex items-center" style={{ width:"max-content" }}>
-          {STRIP.map((item, i) => (
-            <span key={i} className="inline-flex items-center gap-6 px-8">
-              <span className="text-[10px] font-bold tracking-[0.25em] uppercase whitespace-nowrap"
-                style={{ color:"#AC885B" }}>{item}</span>
-              <span className="w-1 h-1 rounded-full flex-shrink-0" style={{ background:"rgba(255,255,255,0.2)" }} />
-            </span>
-          ))}
+        {/* =========================================
+            RIGHT SIDE: Aspirational Product Object
+            ========================================= */}
+        <div className="w-full lg:w-[50%] flex items-center justify-center relative pb-20 lg:pb-0 pt-10 lg:pt-0">
+          
+          {/* Sculptural Lighting: Ambient Rim Glow */}
+          <motion.div initial={{ opacity:0 }} animate={{ opacity:1 }} transition={{ duration: 2, delay: 0.5 }}
+            className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[350px] h-[400px] lg:w-[500px] lg:h-[600px] rounded-[100%] blur-[100px] lg:blur-[140px] pointer-events-none"
+            style={{ background: "radial-gradient(ellipse, rgba(255,255,255,0.4) 0%, rgba(200,169,126,0.15) 50%, rgba(200,169,126,0) 80%)" }}
+          />
+
+          <motion.div style={{ y: productY }} className="relative z-10 w-full max-w-[400px] lg:max-w-[600px] aspect-[4/5] flex items-center justify-center">
+            
+            <motion.div initial={{ opacity:0, scale:0.95, y:40 }} animate={{ opacity:1, scale:1, y:0 }} transition={{ duration:1.6, delay:0.2, ease:"easeOut" }} className="relative w-full h-full flex items-center justify-center">
+              
+              {/* Product floating slowly */}
+              <motion.div animate={{ y:[0,-8,0] }} transition={{ duration:6, repeat:Infinity, ease:"easeInOut" }} className="relative w-full h-[110%]">
+                <Image src="/assets/products/elite-removed.png" alt="Skyliqua Elite"
+                  fill className="object-contain" priority
+                  style={{ filter:"drop-shadow(0 40px 50px rgba(0,0,0,0.5)) drop-shadow(0 20px 20px rgba(0,0,0,0.3)) brightness(1.05) contrast(1.02)" }}
+                  sizes="(max-width: 1024px) 400px, 600px" />
+              </motion.div>
+
+              {/* Sculptural Ground Reflection / Shadow */}
+              <motion.div animate={{ scale:[1, 0.95, 1], opacity:[0.6, 0.4, 0.6] }} transition={{ duration:6, repeat:Infinity, ease:"easeInOut" }}
+                className="absolute -bottom-4 left-1/2 -translate-x-1/2 w-[70%] h-[16px] rounded-[100%] blur-[12px]"
+                style={{ background: "radial-gradient(ellipse at center, rgba(0,0,0,0.8) 0%, rgba(0,0,0,0) 70%)" }}
+              />
+              
+            </motion.div>
+
+          </motion.div>
         </div>
       </div>
+
     </section>
   );
 }

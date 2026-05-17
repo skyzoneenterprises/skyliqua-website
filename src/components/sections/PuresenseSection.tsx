@@ -43,7 +43,7 @@ export function PuresenseSection() {
           <p className="text-[10px] font-bold tracking-[0.28em] uppercase mb-4" style={{ color:"#A5CBC1" }}>
             The Science Inside
           </p>
-          <h2 className="font-display text-white m-0 mb-4" style={{ fontSize:"clamp(1.9rem,4vw,3.2rem)", fontWeight:700, lineHeight:1.1, letterSpacing:"-0.02em" }}>
+          <h2 className="font-serif text-white m-0 mb-4" style={{ fontSize:"clamp(1.9rem,4vw,3.2rem)", fontWeight:700, lineHeight:1.1, letterSpacing:"-0.02em" }}>
             Puresense Technology.<br />
             <em className="font-normal" style={{ fontStyle:"italic" }}>Twelve stages of pure science.</em>
           </h2>
@@ -61,7 +61,7 @@ export function PuresenseSection() {
             <motion.div key={phase.id} variants={iV}
               className="flex flex-col p-8 sm:p-10 rounded-sm"
               style={{ background:"#0D1C1B", border:"1px solid rgba(255,255,255,0.04)" }}>
-              <h3 className="font-display text-xl sm:text-2xl font-bold mb-3" style={{ color:"#ffffff", letterSpacing:"-0.01em" }}>
+              <h3 className="font-serif text-xl sm:text-2xl font-bold mb-3" style={{ color:"#ffffff", letterSpacing:"-0.01em" }}>
                 {phase.title}
               </h3>
               <p className="text-sm mb-8 leading-relaxed" style={{ color:"rgba(255,255,255,0.4)" }}>
@@ -91,7 +91,7 @@ export function PuresenseSection() {
             { v:"10 L",  l:"Insulated Storage",      s:"Always-ready, always pure" },
           ].map(stat => (
             <div key={stat.l} className="text-center py-8 sm:py-10 px-6" style={{ background:"#0B1817" }}>
-              <div className="font-display font-bold leading-none mb-2" style={{ fontSize:"clamp(2.2rem,4vw,3rem)", color:"#A5CBC1" }}>{stat.v}</div>
+              <div className="font-serif font-bold leading-none mb-2" style={{ fontSize:"clamp(2.2rem,4vw,3rem)", color:"#A5CBC1" }}>{stat.v}</div>
               <div className="font-semibold text-sm mb-1.5" style={{ color:"rgba(255,255,255,0.72)" }}>{stat.l}</div>
               <div className="text-xs" style={{ color:"rgba(255,255,255,0.28)" }}>{stat.s}</div>
             </div>

@@ -42,7 +42,7 @@ export function WhySkyliqua() {
               { to:100, suffix:"%",   label:"Service Commitment",   sub:"lifetime support"        },
             ].map(s => (
               <div key={s.label} className="text-center py-8 sm:py-10 px-4 sm:px-6" style={{ background:"#081312" }}>
-                <div className="font-display font-bold leading-none mb-2" style={{ fontSize:"clamp(2rem,4vw,3.4rem)", color:"#A5CBC1" }}>
+                <div className="font-serif font-bold leading-none mb-2" style={{ fontSize:"clamp(2rem,4vw,3.4rem)", color:"#A5CBC1" }}>
                   <Counter to={s.to} suffix={s.suffix} />
                 </div>
                 <div className="text-xs sm:text-sm font-semibold mb-1" style={{ color:"rgba(255,255,255,0.72)" }}>{s.label}</div>
@@ -60,7 +60,7 @@ export function WhySkyliqua() {
           {/* Left */}
           <motion.div initial={{ opacity:0, y:24 }} whileInView={{ opacity:1, y:0 }} viewport={{ once:true, margin:"-60px" }} transition={{ duration:0.65, ease:"easeOut" }}>
             <p className="text-[10px] font-bold tracking-[0.28em] uppercase mb-4" style={{ color:"#22615F" }}>Our Promise</p>
-            <h2 className="font-display m-0 mb-5 leading-tight" style={{ fontSize:"clamp(1.8rem,3.5vw,3rem)", fontWeight:700, color:"#0C0F0D", letterSpacing:"-0.02em" }}>
+            <h2 className="font-serif m-0 mb-5 leading-tight" style={{ fontSize:"clamp(1.8rem,3.5vw,3rem)", fontWeight:700, color:"#0C0F0D", letterSpacing:"-0.02em" }}>
               Built for Life. <em className="font-normal" style={{ fontStyle:"italic", color:"#22615F" }}>Backed for Life.</em>
             </h2>
             <p className="text-sm sm:text-base leading-relaxed font-light mb-8" style={{ color:"rgba(12,15,13,0.5)", maxWidth:"420px" }}>

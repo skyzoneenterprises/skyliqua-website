@@ -30,7 +30,7 @@ export function FeatureGrid() {
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-16 items-center">
           <motion.div variants={fadeUp} initial="hidden" whileInView="show" viewport={{ once:true, margin:"-60px" }}>
             <p className="text-[10px] font-bold tracking-[0.28em] uppercase mb-4" style={{ color:"#22615F" }}>Feature 01 · Copper Enrichment</p>
-            <h2 className="font-display m-0 mb-5 leading-tight" style={{ fontSize:"clamp(1.8rem,3.5vw,3rem)", fontWeight:700, color:"#0C0F0D", letterSpacing:"-0.02em" }}>
+            <h2 className="font-serif m-0 mb-5 leading-tight" style={{ fontSize:"clamp(1.8rem,3.5vw,3rem)", fontWeight:700, color:"#0C0F0D", letterSpacing:"-0.02em" }}>
               Ancient Wisdom,<br /><em className="font-normal" style={{ fontStyle:"italic" }}>Modern Precision.</em>
             </h2>
             <p className="text-sm sm:text-base leading-relaxed font-light mb-6" style={{ color:"rgba(12,15,13,0.5)", maxWidth:"440px" }}>
@@ -65,7 +65,7 @@ export function FeatureGrid() {
             </motion.div>
             <motion.div variants={fadeUp} initial="hidden" whileInView="show" viewport={{ once:true, margin:"-60px" }}>
               <p className="text-[10px] font-bold tracking-[0.28em] uppercase mb-4" style={{ color:"#A5CBC1" }}>Feature 02 · Alkaline Balance</p>
-              <h2 className="font-display m-0 mb-5 leading-tight" style={{ fontSize:"clamp(1.8rem,3.5vw,3rem)", fontWeight:700, color:"#fff", letterSpacing:"-0.02em" }}>
+              <h2 className="font-serif m-0 mb-5 leading-tight" style={{ fontSize:"clamp(1.8rem,3.5vw,3rem)", fontWeight:700, color:"#fff", letterSpacing:"-0.02em" }}>
                 pH Optimised<br /><em className="font-normal" style={{ fontStyle:"italic" }}>for Your Body.</em>
               </h2>
               <p className="text-sm sm:text-base leading-relaxed font-light mb-6" style={{ color:"rgba(255,255,255,0.4)", maxWidth:"440px" }}>
@@ -89,7 +89,7 @@ export function FeatureGrid() {
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-16 items-center">
             <motion.div variants={fadeUp} initial="hidden" whileInView="show" viewport={{ once:true, margin:"-60px" }}>
               <p className="text-[10px] font-bold tracking-[0.28em] uppercase mb-4" style={{ color:"#AC885B" }}>Feature 03 · Smart LED · Elite Exclusive</p>
-              <h2 className="font-display m-0 mb-5 leading-tight" style={{ fontSize:"clamp(1.8rem,3.5vw,3rem)", fontWeight:700, color:"#0C0F0D", letterSpacing:"-0.02em" }}>
+              <h2 className="font-serif m-0 mb-5 leading-tight" style={{ fontSize:"clamp(1.8rem,3.5vw,3rem)", fontWeight:700, color:"#0C0F0D", letterSpacing:"-0.02em" }}>
                 Total Visibility,<br /><em className="font-normal" style={{ fontStyle:"italic" }}>Total Confidence.</em>
               </h2>
               <p className="text-sm sm:text-base leading-relaxed font-light mb-6" style={{ color:"rgba(12,15,13,0.5)", maxWidth:"440px" }}>

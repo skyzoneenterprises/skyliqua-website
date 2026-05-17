@@ -79,7 +79,7 @@ export function ProductShowcase() {
         <div className="flex flex-col md:flex-row items-center justify-between mb-6 sm:mb-8 gap-5">
           <div className="text-center md:text-left">
             <p className="text-[9px] sm:text-[10px] font-bold tracking-[0.25em] uppercase mb-1.5" style={{ color:"#22615F" }}>Our Collection</p>
-            <h2 className="font-display text-3xl sm:text-4xl font-bold m-0" style={{ color:"#0C0F0D", lineHeight:1.1, letterSpacing:"-0.02em" }}>
+            <h2 className="font-serif text-3xl sm:text-4xl font-bold m-0" style={{ color:"#0C0F0D", lineHeight:1.1, letterSpacing:"-0.02em" }}>
               Choose Your Purifier
             </h2>
           </div>
@@ -135,7 +135,7 @@ export function ProductShowcase() {
               {/* Content Side */}
               <div className="w-full lg:w-[55%] p-6 sm:p-8 lg:p-12 flex flex-col justify-center bg-white lg:h-full lg:overflow-y-auto">
                 <p className="text-[9px] sm:text-[10px] font-bold tracking-[0.25em] uppercase mb-1.5" style={{ color:p.accentColor }}>{p.tagline}</p>
-                <h3 className="font-display font-bold mb-1" style={{ fontSize:"clamp(1.8rem,3vw,2.5rem)", color:"#0C0F0D", lineHeight:1.1, letterSpacing:"-0.02em" }}>
+                <h3 className="font-serif font-bold mb-1" style={{ fontSize:"clamp(1.8rem,3vw,2.5rem)", color:"#0C0F0D", lineHeight:1.1, letterSpacing:"-0.02em" }}>
                   {p.name}
                 </h3>
                 <p className="text-[10px] sm:text-[11px] font-bold tracking-[0.2em] uppercase mb-4" style={{ color:"rgba(12,15,13,0.4)" }}>
