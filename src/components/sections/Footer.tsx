@@ -21,20 +21,13 @@ export function Footer() {
               Advanced 12-stage Puresense purification, enriched with copper and alkaline goodness. Life-long care for your family's health.
             </p>
             <div className="flex gap-2.5">
-              {[
-                { label:"Instagram", href:"https://www.instagram.com/skyzone_enterprises777?igsh=emN1MnNoYXloZnZk", fill:false, isInsta:true },
-              ].map(s => (
-                <a key={s.label} href={s.href} target="_blank" rel="noopener noreferrer" aria-label={s.label}
-                  className="w-9 h-9 rounded-xl flex items-center justify-center transition-all duration-200"
-                  style={{ background:"rgba(255,255,255,0.06)", color:"rgba(255,255,255,0.38)" }}
-                  onMouseEnter={e=>{ const el=e.currentTarget as HTMLElement; el.style.background="rgba(182,143,84,0.15)"; el.style.color="#B68F54"; }}
-                  onMouseLeave={e=>{ const el=e.currentTarget as HTMLElement; el.style.background="rgba(255,255,255,0.06)"; el.style.color="rgba(255,255,255,0.38)"; }}>
-                  {s.isInsta
-                    ? <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round"><rect x="2" y="2" width="20" height="20" rx="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg>
-                    : <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor"><path d={s.path!}/></svg>
-                  }
-                </a>
-              ))}
+              <a href="https://www.instagram.com/skyzone_enterprises777?igsh=emN1MnNoYXloZnZk" target="_blank" rel="noopener noreferrer" aria-label="Instagram"
+                className="w-9 h-9 rounded-xl flex items-center justify-center transition-all duration-200"
+                style={{ background:"rgba(255,255,255,0.06)", color:"rgba(255,255,255,0.38)" }}
+                onMouseEnter={e=>{ const el=e.currentTarget as HTMLElement; el.style.background="rgba(182,143,84,0.15)"; el.style.color="#B68F54"; }}
+                onMouseLeave={e=>{ const el=e.currentTarget as HTMLElement; el.style.background="rgba(255,255,255,0.06)"; el.style.color="rgba(255,255,255,0.38)"; }}>
+                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round"><rect x="2" y="2" width="20" height="20" rx="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg>
+              </a>
             </div>
           </div>
 
