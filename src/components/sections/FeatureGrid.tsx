@@ -39,8 +39,10 @@ export function FeatureGrid() {
             </p>
             <div className="flex flex-wrap gap-2 sm:gap-2.5">
               {["Antimicrobial","Supports Immunity","Aids Digestion","Thyroid Health"].map(tag => (
-                <span key={tag} className="px-3 py-1.5 sm:px-4 sm:py-2 rounded-full text-xs sm:text-[12px] font-semibold text-grad-primary"
-                  style={{ background:"rgba(20,135,142,0.08)", border:"1px solid rgba(20,135,142,0.14)" }}>{tag}</span>
+                <span key={tag} className="px-3 py-1.5 sm:px-4 sm:py-2 rounded-full text-xs sm:text-[12px] font-semibold"
+                  style={{ background:"rgba(20,135,142,0.08)", border:"1px solid rgba(20,135,142,0.14)" }}>
+                  <span className="text-grad-primary">{tag}</span>
+                </span>
               ))}
             </div>
           </motion.div>
@@ -69,8 +71,10 @@ export function FeatureGrid() {
               </p>
               <div className="flex flex-wrap gap-2 sm:gap-2.5">
                 {["pH 7.5–9.5","Enhanced Absorption","Neutralises Acidity","Bone Health"].map(tag => (
-                  <span key={tag} className="px-3 py-1.5 sm:px-4 sm:py-2 rounded-full text-xs sm:text-[12px] font-semibold text-grad-primary"
-                    style={{ background:"rgba(20,135,142,0.08)", border:"1px solid rgba(20,135,142,0.14)" }}>{tag}</span>
+                  <span key={tag} className="px-3 py-1.5 sm:px-4 sm:py-2 rounded-full text-xs sm:text-[12px] font-semibold"
+                    style={{ background:"rgba(20,135,142,0.08)", border:"1px solid rgba(20,135,142,0.14)" }}>
+                    <span className="text-grad-primary">{tag}</span>
+                  </span>
                 ))}
               </div>
             </motion.div>
