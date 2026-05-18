@@ -6,7 +6,7 @@ import { Mail, Phone, MapPin } from "lucide-react";
 
 export function Footer() {
   return (
-    <footer id="contact" style={{ background:"#081312", paddingTop:"64px", paddingBottom:"36px" }}>
+    <footer id="contact" style={{ background:"#080908", paddingTop:"64px", paddingBottom:"36px" }}>
       <div className="w-full max-w-[1360px] mx-auto px-5 sm:px-8 lg:px-16">
 
         {/* Grid — 1-col mobile, 2-col sm, 4-col lg */}
@@ -29,7 +29,7 @@ export function Footer() {
                 <a key={s.label} href="#" aria-label={s.label}
                   className="w-9 h-9 rounded-xl flex items-center justify-center transition-all duration-200"
                   style={{ background:"rgba(255,255,255,0.06)", color:"rgba(255,255,255,0.38)" }}
-                  onMouseEnter={e=>{ const el=e.currentTarget as HTMLElement; el.style.background="rgba(172,136,91,0.15)"; el.style.color="#AC885B"; }}
+                  onMouseEnter={e=>{ const el=e.currentTarget as HTMLElement; el.style.background="rgba(200,169,126,0.15)"; el.style.color="#C8A97E"; }}
                   onMouseLeave={e=>{ const el=e.currentTarget as HTMLElement; el.style.background="rgba(255,255,255,0.06)"; el.style.color="rgba(255,255,255,0.38)"; }}>
                   {s.isInsta
                     ? <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round"><rect x="2" y="2" width="20" height="20" rx="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg>
@@ -47,7 +47,7 @@ export function Footer() {
               <Link key={item} href="#products"
                 className="block text-sm font-light mb-3.5 transition-colors duration-200"
                 style={{ color:"rgba(255,255,255,0.48)" }}
-                onMouseEnter={e=>{ (e.currentTarget as HTMLElement).style.color="#AC885B"; }}
+                onMouseEnter={e=>{ (e.currentTarget as HTMLElement).style.color="#C8A97E"; }}
                 onMouseLeave={e=>{ (e.currentTarget as HTMLElement).style.color="rgba(255,255,255,0.48)"; }}>
                 {item}
               </Link>
@@ -61,7 +61,7 @@ export function Footer() {
               <Link key={item} href="#puresense"
                 className="block text-sm font-light mb-3.5 transition-colors duration-200"
                 style={{ color:"rgba(255,255,255,0.48)" }}
-                onMouseEnter={e=>{ (e.currentTarget as HTMLElement).style.color="#AC885B"; }}
+                onMouseEnter={e=>{ (e.currentTarget as HTMLElement).style.color="#C8A97E"; }}
                 onMouseLeave={e=>{ (e.currentTarget as HTMLElement).style.color="rgba(255,255,255,0.48)"; }}>
                 {item}
               </Link>
@@ -77,7 +77,7 @@ export function Footer() {
               { icon:MapPin,text:"123 Pure Water Avenue,\nTech Park, City — 400001" },
             ].map(({ icon:Icon, text }) => (
               <div key={text} className="flex items-start gap-3 mb-4">
-                <Icon size={14} className="flex-shrink-0 mt-0.5" style={{ color:"#AC885B" }} />
+                <Icon size={14} className="flex-shrink-0 mt-0.5" style={{ color:"#C8A97E" }} />
                 <span className="text-sm font-light leading-relaxed whitespace-pre-line" style={{ color:"rgba(255,255,255,0.42)" }}>{text}</span>
               </div>
             ))}
@@ -85,9 +85,9 @@ export function Footer() {
             <div className="mt-8">
               <div className="text-[10px] font-bold tracking-[0.22em] uppercase mb-3" style={{ color:"rgba(255,255,255,0.3)" }}>Additional Info</div>
               <p className="text-sm font-light mb-2" style={{ color:"rgba(255,255,255,0.42)" }}>
-                pH Information: <strong style={{ color: "#AC885B" }}>7.5 to 8.5</strong>
+                pH Information: <strong style={{ color: "#C8A97E" }}>7.5 to 8.5</strong>
               </p>
-              <p className="text-xs font-light leading-relaxed mt-3" style={{ color:"rgba(255,255,255,0.35)", paddingLeft: "10px", borderLeft: "2px solid #AC885B" }}>
+              <p className="text-xs font-light leading-relaxed mt-3" style={{ color:"rgba(255,255,255,0.35)", paddingLeft: "10px", borderLeft: "2px solid #C8A97E" }}>
                 We provide services as well. If you want to check your existing filter, <a href="#contact" className="underline hover:text-white transition-colors">connect with us</a>.
               </p>
             </div>
@@ -105,7 +105,7 @@ export function Footer() {
               <Link key={t.href} href={t.href}
                 className="text-xs font-light transition-colors duration-200"
                 style={{ color:"rgba(255,255,255,0.25)" }}
-                onMouseEnter={e=>{ (e.currentTarget as HTMLElement).style.color="#AC885B"; }}
+                onMouseEnter={e=>{ (e.currentTarget as HTMLElement).style.color="#C8A97E"; }}
                 onMouseLeave={e=>{ (e.currentTarget as HTMLElement).style.color="rgba(255,255,255,0.25)"; }}>
                 {t.label}
               </Link>

@@ -1,6 +1,7 @@
 "use client";
 
 import { motion, type Variants } from "framer-motion";
+import Image from "next/image";
 
 const PHASES = [
   {
@@ -28,10 +29,22 @@ const iV: Variants = { hidden:{ opacity:0, y:20 }, show:{ opacity:1, y:0, transi
 
 export function PuresenseSection() {
   return (
-    <section id="puresense" className="relative overflow-hidden" style={{ background:"#081312", padding:"100px 0 80px" }}>
+    <section id="puresense" className="relative overflow-hidden bg-[#0A0C0B]" style={{ padding:"100px 0 80px" }}>
+      {/* Cinematic Marble Background with Blur */}
+      <div className="absolute inset-0 z-0">
+        <Image 
+          src="/assets/hero_bg_desktop.png" 
+          alt="Luxury Marble Texture" 
+          fill 
+          className="object-cover object-center opacity-60" 
+          quality={80} 
+        />
+        <div className="absolute inset-0 backdrop-blur-[40px] bg-[#050A09]/70" />
+      </div>
+
       {/* Ambient top glow & Watermark */}
-      <div className="absolute top-0 left-1/2 -translate-x-1/2 pointer-events-none opacity-20"
-        style={{ width:"600px", height:"280px", background:"radial-gradient(ellipse, rgba(34,97,95,0.15) 0%, transparent 70%)", filter:"blur(40px)" }} />
+      <div className="absolute top-0 left-1/2 -translate-x-1/2 pointer-events-none opacity-20 z-0"
+        style={{ width:"600px", height:"280px", background:"radial-gradient(ellipse, rgba(200,169,126,0.15) 0%, transparent 70%)", filter:"blur(40px)" }} />
       <div className="absolute top-[10%] right-[-10%] pointer-events-none opacity-[0.02] mix-blend-screen select-none">
         <img src="/assets/brand/skyliqua-logo-clean.png" alt="" style={{ width:"800px", height:"auto", filter:"grayscale(1) brightness(200%)" }} />
       </div>
@@ -40,10 +53,10 @@ export function PuresenseSection() {
 
         {/* Header */}
         <div className="max-w-2xl mb-12 sm:mb-16">
-          <p className="text-[10px] font-bold tracking-[0.28em] uppercase mb-4" style={{ color:"#A5CBC1" }}>
+          <p className="text-[10px] font-bold tracking-[0.28em] uppercase mb-4" style={{ color:"#C4E2DB" }}>
             The Science Inside
           </p>
-          <h2 className="font-serif text-white m-0 mb-4" style={{ fontSize:"clamp(1.9rem,4vw,3.2rem)", fontWeight:700, lineHeight:1.1, letterSpacing:"-0.02em" }}>
+          <h2 className="font-serif font-medium tracking-tight text-white m-0 mb-4" style={{ fontSize:"clamp(1.9rem,4vw,3.2rem)", lineHeight:1.1 }}>
             Puresense Technology.<br />
             <em className="font-normal" style={{ fontStyle:"italic" }}>Twelve stages of pure science.</em>
           </h2>
@@ -60,8 +73,8 @@ export function PuresenseSection() {
           {PHASES.map((phase) => (
             <motion.div key={phase.id} variants={iV}
               className="flex flex-col p-8 sm:p-10 rounded-sm"
-              style={{ background:"#0D1C1B", border:"1px solid rgba(255,255,255,0.04)" }}>
-              <h3 className="font-serif text-xl sm:text-2xl font-bold mb-3" style={{ color:"#ffffff", letterSpacing:"-0.01em" }}>
+              style={{ background:"rgba(10, 20, 18, 0.4)", backdropFilter:"blur(16px)", border:"1px solid rgba(255,255,255,0.04)" }}>
+              <h3 className="font-serif font-medium tracking-tight text-xl sm:text-2xl mb-3" style={{ color:"#ffffff" }}>
                 {phase.title}
               </h3>
               <p className="text-sm mb-8 leading-relaxed" style={{ color:"rgba(255,255,255,0.4)" }}>
@@ -71,7 +84,7 @@ export function PuresenseSection() {
               <ul className="space-y-4 mt-auto">
                 {phase.stages.map((stage, i) => (
                   <li key={i} className="flex items-center gap-3">
-                    <span className="flex-shrink-0 w-1.5 h-1.5 rounded-sm" style={{ background:"#A5CBC1" }} />
+                    <span className="flex-shrink-0 w-1.5 h-1.5 rounded-sm" style={{ background:"#C4E2DB" }} />
                     <span className="text-[13px] font-medium tracking-wide" style={{ color:"rgba(255,255,255,0.7)" }}>
                       {stage}
                     </span>
@@ -90,8 +103,8 @@ export function PuresenseSection() {
             { v:"12",    l:"Purification Stages",    s:"Each targeting a specific threat" },
             { v:"10 L",  l:"Insulated Storage",      s:"Always-ready, always pure" },
           ].map(stat => (
-            <div key={stat.l} className="text-center py-8 sm:py-10 px-6" style={{ background:"#0B1817" }}>
-              <div className="font-serif font-bold leading-none mb-2" style={{ fontSize:"clamp(2.2rem,4vw,3rem)", color:"#A5CBC1" }}>{stat.v}</div>
+            <div key={stat.l} className="text-center py-8 sm:py-10 px-6" style={{ background:"rgba(10, 20, 18, 0.5)", backdropFilter:"blur(16px)" }}>
+              <div className="font-serif font-medium tracking-tight leading-none mb-2" style={{ fontSize:"clamp(2.2rem,4vw,3rem)", color:"#C4E2DB" }}>{stat.v}</div>
               <div className="font-semibold text-sm mb-1.5" style={{ color:"rgba(255,255,255,0.72)" }}>{stat.l}</div>
               <div className="text-xs" style={{ color:"rgba(255,255,255,0.28)" }}>{stat.s}</div>
             </div>

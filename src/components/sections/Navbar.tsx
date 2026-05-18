@@ -90,7 +90,7 @@ export function Navbar() {
             exit={{ opacity: 0, y: -8 }}
             transition={{ duration: 0.2 }}
             className="md:hidden absolute top-full left-0 right-0 border-b"
-            style={{ background: "rgba(8,19,18,0.98)", backdropFilter: "blur(20px)", borderColor: "rgba(255,255,255,0.05)" }}
+            style={{ background: "rgba(5,20,19,0.98)", backdropFilter: "blur(20px)", borderColor: "rgba(255,255,255,0.05)" }}
           >
             <div className="px-5 py-4 flex flex-col gap-1">
               {LINKS.map((l) => (
@@ -105,7 +105,7 @@ export function Navbar() {
               ))}
                 <a href="#contact" onClick={() => setOpen(false)}
                 className="mt-2 w-full py-4 text-center rounded-sm text-white font-bold text-[15px] tracking-wide uppercase"
-                style={{ background: "#AC885B" }}>
+                style={{ background: "#C8A97E" }}>
                 Get Yours Now
               </a>
             </div>

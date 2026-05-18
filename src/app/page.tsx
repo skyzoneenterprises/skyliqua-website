@@ -1,6 +1,5 @@
 import { Navbar }           from "@/components/sections/Navbar";
 import { HeroSection }      from "@/components/sections/HeroSection";
-import { FeaturesSection }  from "@/components/sections/FeaturesSection";
 import { ProductShowcase }  from "@/components/sections/ProductShowcase";
 import { PuresenseSection } from "@/components/sections/PuresenseSection";
 import { FeatureGrid }      from "@/components/sections/FeatureGrid";
@@ -14,7 +13,6 @@ export default function Home() {
       <Navbar />
       <main>
         <HeroSection />
-        <FeaturesSection />
         <ProductShowcase />
         <PuresenseSection />
         <FeatureGrid />

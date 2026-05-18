@@ -12,7 +12,7 @@ const FEATURES = [
 
 export function FeaturesSection() {
   return (
-    <section id="features" className="relative w-full py-32 bg-[#041D1A] overflow-hidden">
+    <section id="features" className="hidden md:block relative w-full py-32 bg-[#041D1A] overflow-hidden">
       
       {/* Background Decor */}
       <div className="absolute top-0 left-1/2 -translate-x-1/2 w-full max-w-[1000px] h-[1px] bg-gradient-to-r from-transparent via-[#C8A97E]/30 to-transparent" />

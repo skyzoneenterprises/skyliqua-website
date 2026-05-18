@@ -1,14 +1,47 @@
 "use client";
 
 import Image from "next/image";
-import { useRef } from "react";
-import { motion, useScroll, useTransform } from "framer-motion";
+import { useRef, useState, useEffect } from "react";
+import { motion, useScroll, useTransform, AnimatePresence } from "framer-motion";
+
+const HERO_PRODUCTS = [
+  { id: 'elite', image: '/assets/products/elite-removed.png', alt: 'Skyliqua Elite', scale: 1 },
+  { id: 'zen', image: '/assets/products/zen-removed.png', alt: 'Skyliqua Zen', scale: 1 },
+  { id: 'prime', image: '/assets/products/prime-removed.png', alt: 'Skyliqua Prime', scale: 0.85 }
+];
 
 const EASE = [0.16, 1, 0.3, 1] as const;
 
 export function HeroSection() {
   const ref = useRef<HTMLElement>(null);
   const { scrollYProgress } = useScroll({ target: ref, offset: ["start start", "end start"] });
+  const [currentIndex, setCurrentIndex] = useState(0);
+  const [direction, setDirection] = useState(1);
+
+  useEffect(() => {
+    const timer = setInterval(() => {
+      setDirection(1);
+      setCurrentIndex((prev) => (prev + 1) % HERO_PRODUCTS.length);
+    }, 5000);
+    return () => clearInterval(timer);
+  }, []);
+
+  const variants = {
+    enter: (direction: number) => ({
+      x: direction > 0 ? 400 : -400,
+      opacity: 0
+    }),
+    center: {
+      zIndex: 1,
+      x: 0,
+      opacity: 1
+    },
+    exit: (direction: number) => ({
+      zIndex: 0,
+      x: direction < 0 ? 400 : -400,
+      opacity: 0
+    })
+  };
   
   // Cinematic parallax effects
   const bgY = useTransform(scrollYProgress, [0, 1], [0, 120]);
@@ -16,48 +49,62 @@ export function HeroSection() {
   const textY = useTransform(scrollYProgress, [0, 1], [0, 90]);
 
   return (
-    <section ref={ref} className="relative w-full overflow-hidden bg-[#021411]" style={{ minHeight: "100dvh" }}>
+    <section ref={ref} className="relative w-full overflow-hidden bg-[#051413]" style={{ minHeight: "100dvh" }}>
       
       {/* =========================================
           BACKGROUND: Cinematic Marble Canvas
           ========================================= */}
-      <motion.div style={{ y: bgY }} className="absolute inset-0 z-0">
+      <motion.div style={{ y: bgY }} className="absolute inset-0 z-0 bg-[#051413]">
+        {/* Desktop Canvas */}
         <Image 
-          src="/assets/hero-bg.jpeg" 
+          src="/assets/hero_bg_desktop.png" 
           alt="Luxury Marble Canvas" 
           fill 
-          className="object-cover object-center scale-[1.05] saturate-[0.85] contrast-[1.05] brightness-[0.9]" 
+          className="hidden md:block object-cover object-center scale-[1.02] saturate-[0.95] contrast-[1.05] brightness-[0.95]" 
           priority 
           quality={100} 
         />
+        {/* Mobile Canvas */}
+        <Image 
+          src="/assets/hero_bg_mobile.png" 
+          alt="Luxury Marble Canvas" 
+          fill 
+          className="block md:hidden object-cover object-center scale-[1.02] saturate-[0.95] contrast-[1.05] brightness-[0.95]" 
+          priority 
+          quality={100} 
+        />
+        
+        {/* Photographic Grain Overlay for Matte Finish */}
+        <div className="absolute inset-0 z-10 opacity-[0.04] mix-blend-overlay pointer-events-none" style={{ backgroundImage: "url('data:image/svg+xml,%3Csvg viewBox=%220 0 200 200%22 xmlns=%22http://www.w3.org/2000/svg%22%3E%3Cfilter id=%22noiseFilter%22%3E%3CfeTurbulence type=%22fractalNoise%22 baseFrequency=%220.85%22 numOctaves=%223%22 stitchTiles=%22stitch%22/%3E%3C/filter%3E%3Crect width=%22100%25%22 height=%22100%25%22 filter=%22url(%23noiseFilter)%22/%3E%3C/svg%3E')" }}></div>
       </motion.div>
 
       {/* =========================================
           MASK: Deep Cinematic Vignette & Blur
           ========================================= */}
-      {/* Heavy dark vignette to focus the center and frame the product */}
-      <div className="absolute inset-0 z-0 pointer-events-none bg-[radial-gradient(ellipse_at_center,transparent_0%,rgba(2,20,17,0.7)_100%)]" />
+      {/* Refined Vignette to add depth without muddying */}
+      <div className="absolute inset-0 z-0 pointer-events-none mix-blend-multiply bg-[radial-gradient(ellipse_at_center,transparent_20%,rgba(5,20,19,0.5)_100%)]" />
       
-      {/* Targeted extremely soft blur for text readability */}
+      {/* Targeted cinematic blur for text readability (Desktop) */}
       <div 
         className="hidden lg:block absolute inset-0 z-0 pointer-events-none" 
         style={{
-          background: "linear-gradient(to right, rgba(250,250,248,0.92) 0%, rgba(250,250,248,0.5) 45%, rgba(250,250,248,0) 70%)",
-          backdropFilter: "blur(30px)",
-          WebkitBackdropFilter: "blur(30px)",
-          maskImage: "linear-gradient(to right, black 30%, transparent 70%)",
-          WebkitMaskImage: "linear-gradient(to right, black 30%, transparent 70%)"
+          background: "linear-gradient(to right, rgba(250,250,248,0.96) 0%, rgba(250,250,248,0.65) 45%, rgba(250,250,248,0) 75%)",
+          backdropFilter: "blur(40px) saturate(1.1)",
+          WebkitBackdropFilter: "blur(40px) saturate(1.1)",
+          maskImage: "linear-gradient(to right, black 35%, transparent 75%)",
+          WebkitMaskImage: "linear-gradient(to right, black 35%, transparent 75%)"
         }} 
       />
 
+      {/* Targeted cinematic blur for text readability (Mobile) */}
       <div 
         className="block lg:hidden absolute inset-0 z-0 pointer-events-none" 
         style={{
-          background: "linear-gradient(to bottom, rgba(250,250,248,0.95) 0%, rgba(250,250,248,0.7) 45%, rgba(250,250,248,0) 75%)",
-          backdropFilter: "blur(24px)",
-          WebkitBackdropFilter: "blur(24px)",
-          maskImage: "linear-gradient(to bottom, black 30%, transparent 75%)",
-          WebkitMaskImage: "linear-gradient(to bottom, black 30%, transparent 75%)"
+          background: "linear-gradient(to bottom, rgba(250,250,248,0.98) 0%, rgba(250,250,248,0.75) 45%, rgba(250,250,248,0) 80%)",
+          backdropFilter: "blur(30px) saturate(1.1)",
+          WebkitBackdropFilter: "blur(30px) saturate(1.1)",
+          maskImage: "linear-gradient(to bottom, black 35%, transparent 80%)",
+          WebkitMaskImage: "linear-gradient(to bottom, black 35%, transparent 80%)"
         }} 
       />
 
@@ -83,7 +130,7 @@ export function HeroSection() {
                 className="font-serif m-0 font-medium tracking-tight leading-none"
                 style={{ color:"#031815", fontSize:"clamp(3.8rem, 6.5vw, 7rem)" }}>
                 Pure Water.<br/>
-                <span className="italic" style={{ color:"#AC885B", fontWeight: 400 }}>Beautifully Refined.</span>
+                <span className="italic" style={{ color:"#C8A97E", fontWeight: 400 }}>Beautifully Refined.</span>
               </motion.h1>
             </div>
 
@@ -120,12 +167,30 @@ export function HeroSection() {
             
             <motion.div initial={{ opacity:0, scale:0.95, y:40 }} animate={{ opacity:1, scale:1, y:0 }} transition={{ duration:1.6, delay:0.2, ease:"easeOut" }} className="relative w-full h-full flex items-center justify-center">
               
-              {/* Product floating slowly */}
-              <motion.div animate={{ y:[0,-8,0] }} transition={{ duration:6, repeat:Infinity, ease:"easeInOut" }} className="relative w-full h-[110%]">
-                <Image src="/assets/products/elite-removed.png" alt="Skyliqua Elite"
-                  fill className="object-contain" priority
-                  style={{ filter:"drop-shadow(0 40px 50px rgba(0,0,0,0.5)) drop-shadow(0 20px 20px rgba(0,0,0,0.3)) brightness(1.05) contrast(1.02)" }}
-                  sizes="(max-width: 1024px) 400px, 600px" />
+              {/* Product floating slowly with horizontal sliding */}
+              <motion.div animate={{ y:[0,-8,0] }} transition={{ duration:6, repeat:Infinity, ease:"easeInOut" }} className="relative w-full h-[110%] flex items-center justify-center overflow-visible">
+                <AnimatePresence initial={false} custom={direction}>
+                  <motion.div
+                    key={currentIndex}
+                    custom={direction}
+                    variants={variants}
+                    initial="enter"
+                    animate="center"
+                    exit="exit"
+                    transition={{
+                      x: { type: "spring", stiffness: 300, damping: 30 },
+                      opacity: { duration: 0.2 }
+                    }}
+                    className="absolute inset-0 flex items-center justify-center"
+                  >
+                    <div className="relative w-full h-full" style={{ transform: `scale(${HERO_PRODUCTS[currentIndex].scale})` }}>
+                      <Image src={HERO_PRODUCTS[currentIndex].image} alt={HERO_PRODUCTS[currentIndex].alt}
+                        fill className="object-contain" priority
+                        style={{ filter:"drop-shadow(0 40px 50px rgba(0,0,0,0.5)) drop-shadow(0 20px 20px rgba(0,0,0,0.3)) brightness(1.05) contrast(1.02)" }}
+                        sizes="(max-width: 1024px) 400px, 600px" />
+                    </div>
+                  </motion.div>
+                </AnimatePresence>
               </motion.div>
 
               {/* Sculptural Ground Reflection / Shadow */}
@@ -133,6 +198,23 @@ export function HeroSection() {
                 className="absolute -bottom-4 left-1/2 -translate-x-1/2 w-[70%] h-[16px] rounded-[100%] blur-[12px]"
                 style={{ background: "radial-gradient(ellipse at center, rgba(0,0,0,0.8) 0%, rgba(0,0,0,0) 70%)" }}
               />
+
+              {/* Slide Indicators */}
+              <div className="absolute -bottom-12 left-1/2 -translate-x-1/2 flex gap-3 z-20">
+                {HERO_PRODUCTS.map((_, i) => (
+                  <button
+                    key={i}
+                    onClick={() => {
+                      if (i === currentIndex) return;
+                      setDirection(i > currentIndex ? 1 : -1);
+                      setCurrentIndex(i);
+                    }}
+                    className="w-8 h-1 rounded-full transition-all duration-500 hover:opacity-80"
+                    style={{ background: i === currentIndex ? "#C8A97E" : "rgba(255,255,255,0.2)" }}
+                    aria-label={`Go to slide ${i + 1}`}
+                  />
+                ))}
+              </div>
               
             </motion.div>
 
