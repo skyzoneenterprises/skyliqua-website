@@ -3,6 +3,7 @@
 import Image from "next/image";
 import { motion } from "framer-motion";
 import { ArrowRight, Settings2, Droplets, Box, Factory } from "lucide-react";
+import { ShareButton } from "@/components/ui/ShareButton";
 
 const PRODUCTS = {
   featured: {
@@ -114,9 +115,18 @@ export function CommercialShowcase() {
               </div>
 
               <div className="flex flex-col p-5 bg-white relative z-10 border-t border-[rgba(182,143,84,0.1)] shrink-0">
-                <h3 className="font-serif text-2xl font-medium tracking-tight mb-2" style={{ color: "#0C0F0D" }}>
-                  {PRODUCTS.featured.name}
-                </h3>
+                <div className="flex items-start justify-between gap-4">
+                  <h3 className="font-serif text-2xl font-medium tracking-tight mb-2" style={{ color: "#0C0F0D" }}>
+                    {PRODUCTS.featured.name}
+                  </h3>
+                  <ShareButton
+                    shareUrl={`/?commercial=${PRODUCTS.featured.id}`}
+                    shareTitle={`Skyliqua Commercial - ${PRODUCTS.featured.name}`}
+                    accentColor="#B68F54"
+                    size="sm"
+                    align="left"
+                  />
+                </div>
                 <p className="text-[13px] leading-relaxed font-light mb-4" style={{ color: "rgba(12,15,13,0.6)", maxWidth: "420px" }}>
                   {PRODUCTS.featured.description}
                 </p>
@@ -147,13 +157,22 @@ export function CommercialShowcase() {
                            </div>
                          </div>
                          <div className="p-6 flex flex-col flex-1 bg-white">
-                           <div className="flex items-center gap-3 mb-3">
-                             <div className="w-8 h-8 rounded-full flex shrink-0 items-center justify-center bg-[rgba(20,135,142,0.05)] border border-[rgba(20,135,142,0.1)] text-[#14878E] group-hover:bg-[#14878E] group-hover:text-white transition-colors duration-300">
-                               <Icon size={14} className="text-[inherit]" />
+                           <div className="flex items-start justify-between gap-3 mb-3">
+                             <div className="flex items-center gap-3">
+                               <div className="w-8 h-8 rounded-full flex shrink-0 items-center justify-center bg-[rgba(20,135,142,0.05)] border border-[rgba(20,135,142,0.1)] text-[#14878E] group-hover:bg-[#14878E] group-hover:text-white transition-colors duration-300">
+                                 <Icon size={14} className="text-[inherit]" />
+                               </div>
+                               <h4 className="font-serif text-[17px] sm:text-[18px] font-medium tracking-tight" style={{ color: "#0C0F0D" }}>
+                                 {prod.name}
+                               </h4>
                              </div>
-                             <h4 className="font-serif text-[17px] sm:text-[18px] font-medium tracking-tight" style={{ color: "#0C0F0D" }}>
-                               {prod.name}
-                             </h4>
+                             <ShareButton
+                               shareUrl={`/?commercial=${prod.id}`}
+                               shareTitle={`Skyliqua Commercial - ${prod.name}`}
+                               accentColor="#14878E"
+                               size="sm"
+                               align="left"
+                             />
                            </div>
                            <p className="text-[13px] leading-relaxed font-light" style={{ color: "rgba(12,15,13,0.55)" }}>
                              {prod.description}

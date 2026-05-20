@@ -56,17 +56,17 @@ function CtaFormContent() {
                 <img src="/assets/brand/skyliqua-logo-clean.png" alt="Skyliqua" style={{ height: "28px", width: "auto", filter: "brightness(0) invert(1)", opacity: 0.8 }} />
               </div>
               <h2 style={{ fontWeight: 600, color: "#ffffff", marginBottom: "24px", letterSpacing: "-0.02em", lineHeight: 1.1 }} className="text-3xl md:text-5xl">
-                Book Your Free <br/><span style={{ color: "#B68F54" }}>Home Consultation</span>
+                Home Consultation & <br/><span style={{ color: "#B68F54" }}>Filter Services</span>
               </h2>
               <p style={{ color: "rgba(255,255,255,0.7)", marginBottom: "40px", lineHeight: 1.6 }} className="text-base md:text-lg">
-                Experience the Puresense difference in your own home. Our experts will test your water quality and recommend the perfect Skyliqua system.
+                Experience the Puresense difference. Book a consultation for a new system, or request our expert team to test, check, and fix your existing water filter.
               </p>
 
               <ul style={{ listStyle: "none", padding: 0, margin: 0, display: "flex", flexDirection: "column", gap: "20px" }}>
                 {[
-                  "Complimentary Water Testing",
-                  "Expert Product Demonstration",
-                  "No-Obligation Quotation"
+                  "Complimentary Water Quality Testing",
+                  "New Skyliqua System Consultation",
+                  "Existing Filter Health Check & Repair"
                 ].map((item, i) => (
                   <li key={i} style={{ display: "flex", alignItems: "center", gap: "16px", color: "rgba(255,255,255,0.85)" }} className="text-sm md:text-base">
                     <div style={{ width: "24px", height: "24px", borderRadius: "4px", background: "rgba(182,143,84,0.2)", display: "flex", alignItems: "center", justifyContent: "center", flexShrink: 0 }}>
@@ -98,8 +98,14 @@ function CtaFormContent() {
               if(selectedModel === "prime") modelName = "Skyliqua Prime";
               if(selectedModel === "zen") modelName = "Skyliqua Zen";
               if(selectedModel === "elite") modelName = "Skyliqua Elite";
+              if(selectedModel === "service-check") modelName = "Filter Health Check-up (Any Brand)";
+              if(selectedModel === "service-repair") modelName = "Repair / Fix Existing Filter";
 
-              const text = `Hi Skyliqua Team,%0A%0AI would like to request a free home consultation.%0A%0A*Name:* ${name}%0A*Phone:* ${phone}%0A*City/Pincode:* ${city}%0A*Product of Interest:* ${modelName}%0A%0APlease call me back.`;
+              const isService = selectedModel.startsWith("service-");
+              const requestType = isService ? "Filter Service Request" : "Free Home Consultation";
+              const labelInterest = isService ? "Requested Service" : "Product of Interest";
+
+              const text = `Hi Skyliqua Team,%0A%0AI would like to request a ${requestType.toLowerCase()}.%0A%0A*Name:* ${name}%0A*Phone:* ${phone}%0A*City/Pincode:* ${city}%0A*${labelInterest}:* ${modelName}%0A%0APlease call me back.`;
               
               setTimeout(() => {
                 setIsSubmitting(false);
@@ -140,7 +146,7 @@ function CtaFormContent() {
               </div>
 
               <div style={{ display: "flex", flexDirection: "column", gap: "8px" }}>
-                <label htmlFor="model" style={{ fontSize: "0.875rem", fontWeight: 500, color: "rgba(12,15,13,0.7)" }}>Product of Interest</label>
+                <label htmlFor="model" style={{ fontSize: "0.875rem", fontWeight: 500, color: "rgba(12,15,13,0.7)" }}>Product / Service of Interest</label>
                 <select
                   id="model" name="model" value={selectedModel} onChange={e => setSelectedModel(e.target.value)}
                   style={{ width: "100%", padding: "14px 20px", borderRadius: "4px", border: "1px solid rgba(12,15,13,0.1)", background: "#FAFAF8", fontSize: "1rem", color: "#0C0F0D", outline: "none", transition: "all 0.2s ease", cursor: "pointer" }}
@@ -151,6 +157,8 @@ function CtaFormContent() {
                   <option value="prime">Skyliqua Prime (9-Stage)</option>
                   <option value="zen">Skyliqua Zen (Alkaline)</option>
                   <option value="elite">Skyliqua Elite (Smart LED)</option>
+                  <option value="service-check">Filter Health Check-up (Any Brand)</option>
+                  <option value="service-repair">Repair / Fix Existing Filter</option>
                 </select>
               </div>
 

@@ -1,9 +1,10 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Image from "next/image";
 import { motion, AnimatePresence, type Variants } from "framer-motion";
 import { Check, ZoomIn, X } from "lucide-react";
+import { ShareButton } from "@/components/ui/ShareButton";
 
 const PRODUCTS = [
   {
@@ -11,7 +12,7 @@ const PRODUCTS = [
     tagline: "Pure essentials, beautifully delivered.",
     variants: [
       { name: "Classic White", hex: "#F9FAFB", image: "/assets/products/prime-removed.png" },
-      { name: "Midnight Black", hex: "#1F2937", image: "/assets/products/prime-other.png" }
+      { name: "Midnight Black", hex: "#1F2937", image: "/assets/prime-color2r.png" }
     ],
     isElite: false, badge: "Best Value", accentColor: "#14878E",
     oval: "radial-gradient(ellipse 85% 80% at 50% 48%, rgba(20,135,142,0.09) 0%, rgba(226,244,242,0.9) 55%, #E8F3F2 100%)",
@@ -24,7 +25,7 @@ const PRODUCTS = [
     tagline: "Balance starts with every sip.",
     variants: [
       { name: "Midnight Black", hex: "#1F2937", image: "/assets/products/zen-removed.png" },
-      { name: "Classic White", hex: "#F9FAFB", image: "/assets/products/zen-other.png" }
+      { name: "Classic White", hex: "#F9FAFB", image: "/assets/zen-color2r.png" }
     ],
     isElite: false, badge: "Most Popular", accentColor: "#14878E",
     oval: "radial-gradient(ellipse 85% 80% at 50% 48%, rgba(20,135,142,0.09) 0%, rgba(226,244,242,0.9) 55%, #E8F3F2 100%)",
@@ -37,7 +38,7 @@ const PRODUCTS = [
     tagline: "The pinnacle. Nothing held back.",
     variants: [
       { name: "Marble White", hex: "#F9FAFB", image: "/assets/products/elite-removed.png" },
-      { name: "Black Gold", hex: "#111111", image: "/assets/products/elite-other.png" }
+      { name: "Black Gold", hex: "#111111", image: "/assets/elite-color2r.png" }
     ],
     isElite: true, badge: "Premium", accentColor: "#B68F54",
     oval: "radial-gradient(ellipse 85% 80% at 50% 48%, rgba(182,143,84,0.10) 0%, rgba(248,242,226,0.9) 55%, #F2EBD6 100%)",
@@ -54,6 +55,27 @@ export function ProductShowcase() {
   const [activeId, setActiveId] = useState("prime");
   const [selectedVariants, setSelectedVariants] = useState<Record<string, number>>({ prime: 0, zen: 0, elite: 0 });
   const [zoomedImage, setZoomedImage] = useState<string | null>(null);
+
+  useEffect(() => {
+    if (typeof window !== "undefined") {
+      const params = new URLSearchParams(window.location.search);
+      const prodParam = params.get("product");
+      if (prodParam && PRODUCTS.some(p => p.id === prodParam)) {
+        setActiveId(prodParam);
+        
+        const colorParam = params.get("color");
+        if (colorParam) {
+          const targetProduct = PRODUCTS.find(p => p.id === prodParam);
+          if (targetProduct) {
+            const idx = targetProduct.variants.findIndex(v => v.name.replace(/\s+/g, '-').toLowerCase() === colorParam);
+            if (idx !== -1) {
+              setSelectedVariants(prev => ({ ...prev, [prodParam]: idx }));
+            }
+          }
+        }
+      }
+    }
+  }, []);
 
   const p = PRODUCTS.find(x => x.id === activeId)!;
   const activeVariantIndex = selectedVariants[activeId] || 0;
@@ -206,18 +228,26 @@ export function ProductShowcase() {
                   ))}
                 </div>
 
-                <a href={`?model=${p.id}&color=${currentVariant.name.replace(/\s+/g, '-').toLowerCase()}#contact`}
-                  className="inline-flex items-center justify-center w-full sm:w-max px-8 py-3.5 rounded-full font-bold text-[12px] tracking-wide text-white transition-all duration-300 active:scale-95"
-                  style={{
-                    background: p.isElite
-                      ? "linear-gradient(135deg, #8E6B3E 0%, #B68F54 40%, #D4B886 100%)"
-                      : "linear-gradient(135deg, #0F6C72 0%, #14878E 40%, #42A6A2 100%)",
-                    boxShadow: p.isElite ? "0 8px 20px -6px rgba(182,143,84,0.4)" : "0 8px 20px -6px rgba(20,135,142,0.4)"
-                  }}
-                  onMouseEnter={e => { e.currentTarget.style.transform = "translateY(-2px)"; e.currentTarget.style.boxShadow = p.isElite ? "0 12px 24px -6px rgba(182,143,84,0.5)" : "0 12px 24px -6px rgba(20,135,142,0.5)"; }}
-                  onMouseLeave={e => { e.currentTarget.style.transform = "translateY(0)"; e.currentTarget.style.boxShadow = p.isElite ? "0 8px 20px -6px rgba(182,143,84,0.4)" : "0 8px 20px -6px rgba(20,135,142,0.4)"; }}>
-                  Enquire About {p.label}
-                </a>
+                <div className="flex flex-col sm:flex-row gap-4 items-center w-full sm:w-auto mt-2">
+                  <a href={`?model=${p.id}&color=${currentVariant.name.replace(/\s+/g, '-').toLowerCase()}#contact`}
+                    className="inline-flex items-center justify-center w-full sm:w-max px-8 py-3.5 rounded-full font-bold text-[12px] tracking-wide text-white transition-all duration-300 active:scale-95"
+                    style={{
+                      background: p.isElite
+                        ? "linear-gradient(135deg, #8E6B3E 0%, #B68F54 40%, #D4B886 100%)"
+                        : "linear-gradient(135deg, #0F6C72 0%, #14878E 40%, #42A6A2 100%)",
+                      boxShadow: p.isElite ? "0 8px 20px -6px rgba(182,143,84,0.4)" : "0 8px 20px -6px rgba(20,135,142,0.4)"
+                    }}
+                    onMouseEnter={e => { e.currentTarget.style.transform = "translateY(-2px)"; e.currentTarget.style.boxShadow = p.isElite ? "0 12px 24px -6px rgba(182,143,84,0.5)" : "0 12px 24px -6px rgba(20,135,142,0.5)"; }}
+                    onMouseLeave={e => { e.currentTarget.style.transform = "translateY(0)"; e.currentTarget.style.boxShadow = p.isElite ? "0 8px 20px -6px rgba(182,143,84,0.4)" : "0 8px 20px -6px rgba(20,135,142,0.4)"; }}>
+                    Enquire About {p.label}
+                  </a>
+                  
+                  <ShareButton
+                    shareUrl={`/?product=${p.id}&color=${currentVariant.name.replace(/\s+/g, '-').toLowerCase()}`}
+                    shareTitle={`Skyliqua ${p.label} (${currentVariant.name}) - ${p.tagline}`}
+                    accentColor={p.accentColor}
+                  />
+                </div>
               </div>
             </motion.div>
           </AnimatePresence>
