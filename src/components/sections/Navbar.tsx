@@ -5,9 +5,9 @@ import Image from "next/image";
 import Link from "next/link";
 
 const LINKS = [
-  { name: "Products",  href: "#products"  },
-  { name: "Puresense", href: "#puresense" },
-  { name: "Features",  href: "#features"  },
+  { name: "Products",  href: "#products",  className: "" },
+  { name: "Puresense", href: "#puresense", className: "" },
+  { name: "Features",  href: "#features",  className: "hidden sm:inline-block" },
 ];
 
 export function Navbar() {
@@ -37,11 +37,11 @@ export function Navbar() {
           <Image src="/assets/brand/skyliqua-logo-clean.png" alt="Skyliqua" fill className="object-contain object-left" priority />
         </Link>
 
-        {/* Desktop nav (always visible on mobile now) */}
-        <nav className="flex items-center gap-8">
+        {/* Desktop nav (always visible on mobile now, with mobile-hidden items) */}
+        <nav className="flex items-center gap-5 sm:gap-8">
           {LINKS.map((l) => (
             <Link key={l.name} href={l.href}
-              className="text-[11px] font-medium tracking-[0.2em] uppercase transition-all duration-300"
+              className={`text-[11px] font-medium tracking-[0.2em] uppercase transition-all duration-300 ${l.className}`}
               style={{ color: scrolled ? "#0C0F0D" : "rgba(12,15,13,0.7)", textShadow: "none" }}
               onMouseEnter={e => { 
                 (e.currentTarget as HTMLElement).style.color = "#14878E"; 
@@ -54,7 +54,7 @@ export function Navbar() {
             </Link>
           ))}
           <a href="#contact"
-            className="px-8 py-[14px] rounded-full text-[10px] font-bold tracking-[0.2em] transition-all duration-500 hover:bg-[#222222] hover:shadow-[0_10px_30px_rgba(0,0,0,0.1)] active:scale-95 uppercase"
+            className="hidden sm:inline-flex items-center justify-center px-8 py-[14px] rounded-full text-[10px] font-bold tracking-[0.2em] transition-all duration-500 hover:bg-[#222222] hover:shadow-[0_10px_30px_rgba(0,0,0,0.1)] active:scale-95 uppercase"
             style={{ background: "#0F0F0F", color: "#FFFFFF" }}>
             Enquire Now
           </a>
