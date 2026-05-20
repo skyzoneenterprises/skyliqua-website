@@ -115,7 +115,7 @@ export function HeroSection() {
             LEFT SIDE: Sculptural Typography
             ========================================= */}
         <motion.div style={{ y: textY }} className="w-full lg:w-[50%] flex flex-col justify-center px-8 sm:px-12 lg:pl-[12%] lg:pr-12 pt-40 lg:pt-0 pb-16 lg:pb-0">
-          <div className="w-full max-w-[540px] mx-auto lg:mx-0">
+          <div className="w-full max-w-[650px] mx-auto lg:mx-0">
             
             {/* Logo */}
             <div className="mb-12 relative z-10 w-full max-w-[300px] lg:max-w-[340px] h-[80px] lg:h-[90px] -ml-2">
@@ -125,12 +125,12 @@ export function HeroSection() {
             </div>
 
             {/* Monumental Headline */}
-            <div className="overflow-hidden mb-6">
+            <div className="overflow-y-hidden overflow-x-visible mb-6" style={{ minWidth: "120%" }}>
               <motion.h1 initial={{ y:"110%" }} animate={{ y:0 }} transition={{ duration:1.2, ease:EASE, delay: 0.1 }}
                 className="font-serif m-0 font-medium tracking-tight leading-none"
-                style={{ color:"#111111", fontSize:"clamp(3.8rem, 6.5vw, 7rem)" }}>
-                Pure Water.<br/>
-                <span className="italic" style={{ color:"#B68F54", fontWeight: 400 }}>Beautifully Refined.</span>
+                style={{ color:"#111111", fontSize:"clamp(3.5rem, 5.5vw, 5.8rem)" }}>
+                Pure&nbsp;Water.<br/>
+                <span className="italic" style={{ color:"#B68F54", fontWeight: 400 }}>Beautifully<br/>Refined.</span>
               </motion.h1>
             </div>
 

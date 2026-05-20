@@ -47,7 +47,7 @@ export function FeatureGrid() {
             </div>
           </motion.div>
           <motion.div variants={fadeIn} initial="hidden" whileInView="show" viewport={{ once:true, margin:"-60px" }}>
-            <ProductPanel src="/assets/products/prime-angled.png" alt="Skyliqua Prime"
+            <ProductPanel src="/assets/products/prime-removed.png" alt="Skyliqua Prime"
               oval="radial-gradient(ellipse 80% 70% at 50% 45%, rgba(20,135,142,0.10) 0%, rgba(225,243,241,0.9) 55%, #E8F2F0 100%)"
               shadow="drop-shadow(0 24px 48px rgba(0,0,0,0.10))" />
           </motion.div>
@@ -82,7 +82,7 @@ export function FeatureGrid() {
             {/* Image second on mobile, first on desktop */}
             <motion.div variants={fadeIn} initial="hidden" whileInView="show" viewport={{ once:true, margin:"-60px" }}
               className="lg:order-first mt-8 lg:mt-0">
-              <ProductPanel src="/assets/products/zen-angled.png" alt="Skyliqua Zen"
+              <ProductPanel src="/assets/products/zen-removed.png" alt="Skyliqua Zen"
                 oval="radial-gradient(ellipse 80% 70% at 50% 45%, rgba(165,203,193,0.14) 0%, rgba(20,35,33,0.05) 55%, #F0F5F4 100%)"
                 shadow="drop-shadow(0 24px 48px rgba(0,0,0,0.15)) drop-shadow(0 4px 16px rgba(165,203,193,0.05))" />
             </motion.div>
@@ -120,7 +120,7 @@ export function FeatureGrid() {
               </div>
             </motion.div>
             <motion.div variants={fadeIn} initial="hidden" whileInView="show" viewport={{ once:true, margin:"-60px" }}>
-              <ProductPanel src="/assets/products/elite-front.png" alt="Skyliqua Elite"
+              <ProductPanel src="/assets/products/elite-removed.png" alt="Skyliqua Elite"
                 oval="radial-gradient(ellipse 80% 70% at 50% 45%, rgba(172,136,91,0.10) 0%, rgba(250,244,228,0.9) 55%, #F5EDD8 100%)"
                 shadow="drop-shadow(0 24px 48px rgba(0,0,0,0.10)) drop-shadow(0 4px 16px rgba(172,136,91,0.10))" />
             </motion.div>
