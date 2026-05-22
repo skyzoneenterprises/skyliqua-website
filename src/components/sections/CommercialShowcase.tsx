@@ -1,8 +1,9 @@
 "use client";
 
+import { useState } from "react";
 import Image from "next/image";
-import { motion } from "framer-motion";
-import { ArrowRight, Settings2, Droplets, Box, Factory } from "lucide-react";
+import { motion, AnimatePresence } from "framer-motion";
+import { ArrowRight, Settings2, Droplets, Box, Factory, ZoomIn, X } from "lucide-react";
 import { ShareButton } from "@/components/ui/ShareButton";
 
 const PRODUCTS = {
@@ -56,8 +57,33 @@ const containerVariants = { hidden: { opacity: 0 }, show: { opacity: 1, transiti
 const itemVariants = { hidden: { opacity: 0, y: 20 }, show: { opacity: 1, y: 0, transition: { duration: 0.6, ease: "easeOut" } } } as any;
 
 export function CommercialShowcase() {
+  const [zoomedImage, setZoomedImage] = useState<string | null>(null);
+
   return (
     <section className="py-12 sm:py-16 relative overflow-hidden bg-[#FAFAF8]">
+      {/* Zoom Modal */}
+      <AnimatePresence>
+        {zoomedImage && (
+          <motion.div
+            initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}
+            className="fixed inset-0 z-[200] flex items-center justify-center p-4 sm:p-10"
+            style={{ background: "rgba(12,15,13,0.9)", backdropFilter: "blur(8px)" }}
+            onClick={() => setZoomedImage(null)}
+          >
+            <button className="absolute top-6 right-6 p-2 rounded-full bg-white/10 hover:bg-white/20 transition-colors text-white">
+              <X size={24} />
+            </button>
+            <motion.div
+              initial={{ scale: 0.9, opacity: 0 }} animate={{ scale: 1, opacity: 1 }} exit={{ scale: 0.9, opacity: 0 }}
+              transition={{ type: "spring", damping: 25, stiffness: 300 }}
+              className="relative w-full max-w-4xl max-h-[90vh] aspect-square sm:aspect-video"
+              onClick={e => e.stopPropagation()}
+            >
+              <Image src={zoomedImage} alt="Zoomed Product" fill className="object-contain" sizes="100vw" />
+            </motion.div>
+          </motion.div>
+        )}
+      </AnimatePresence>
       {/* Decorative luxury elements */}
       <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[80%] h-[1px] bg-gradient-to-r from-transparent via-[#B68F54]/30 to-transparent" />
       
@@ -99,18 +125,29 @@ export function CommercialShowcase() {
           className="grid grid-cols-1 lg:grid-cols-12 gap-5 lg:gap-6">
           
           {/* Featured Large Item (Left Column) */}
-          <motion.div variants={itemVariants} className="lg:col-span-5 group lg:sticky lg:top-8 h-fit">
-            <div className="relative flex flex-col bg-white overflow-hidden shadow-sm hover:shadow-xl transition-shadow duration-700 h-[calc(100vh-200px)] max-h-[600px] min-h-[400px]" style={{ border: "1px solid rgba(182,143,84,0.25)" }}>
+          <motion.div variants={itemVariants} className="lg:col-span-5 group lg:h-full">
+            <div className="relative flex flex-col bg-white overflow-hidden shadow-sm hover:shadow-xl transition-shadow duration-700 min-h-[400px] lg:h-full" style={{ border: "1px solid rgba(182,143,84,0.25)" }}>
               <div className="absolute top-4 left-4 z-20">
                 <p className="text-[9px] font-bold tracking-[0.2em] uppercase text-white bg-[#B68F54] px-3 py-1 rounded-sm shadow-sm">
                   Flagship Unit
                 </p>
               </div>
               
-              <div className="relative w-full flex-1 bg-[#F9FAFB] overflow-hidden flex items-center justify-center p-6">
+              <div 
+                className="relative w-full aspect-[4/3] lg:aspect-auto lg:flex-1 bg-[#F9FAFB] overflow-hidden flex items-center justify-center p-6 cursor-pointer group/zoom"
+                onClick={() => setZoomedImage(PRODUCTS.featured.image)}
+              >
                 <motion.div className="relative w-full h-full" whileHover={{ scale: 1.05 }} transition={{ duration: 0.8, ease: "easeOut" }}>
                   <Image src={PRODUCTS.featured.image} alt={PRODUCTS.featured.name} fill className="object-contain drop-shadow-2xl" sizes="(max-width: 1024px) 100vw, 40vw" priority />
                 </motion.div>
+                
+                {/* Zoom Icon Overlay */}
+                <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover/zoom:opacity-100 transition-opacity duration-300 bg-black/5 pointer-events-none">
+                  <div className="bg-white/90 backdrop-blur-md p-3.5 rounded-full shadow-lg border border-black/5">
+                    <ZoomIn size={22} color="#B68F54" />
+                  </div>
+                </div>
+
                 <div className="absolute inset-0 bg-gradient-to-t from-white/60 via-transparent to-transparent pointer-events-none" />
               </div>
 
@@ -135,53 +172,108 @@ export function CommercialShowcase() {
             </div>
           </motion.div>
 
-          {/* Standard Items Carousel (Right Column) */}
-          <div className="lg:col-span-7 overflow-hidden flex items-center relative min-h-[400px]">
-             {/* Gradient fades for smooth scrolling edges */}
-             <div className="absolute left-0 top-0 bottom-0 w-8 sm:w-16 bg-gradient-to-r from-[#FAFAF8] to-transparent z-10 pointer-events-none" />
-             <div className="absolute right-0 top-0 bottom-0 w-8 sm:w-16 bg-gradient-to-l from-[#FAFAF8] to-transparent z-10 pointer-events-none" />
+          {/* Standard Items Static Grid (Right Column) */}
+          <div className="lg:col-span-7 flex flex-col justify-start">
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-5 lg:gap-6">
+              {PRODUCTS.standard.map((prod, index) => {
+                const Icon = prod.icon;
+                const isLastOdd = index === PRODUCTS.standard.length - 1 && PRODUCTS.standard.length % 2 !== 0;
 
-            <motion.div 
-               className="flex gap-5 w-max py-4"
-               animate={{ x: ["0%", "-50%"] }}
-               transition={{ repeat: Infinity, duration: 25, ease: "linear" }}
-             >
-                {[...PRODUCTS.standard, ...PRODUCTS.standard].map((prod, index) => {
-                  const Icon = prod.icon;
-                  
+                if (isLastOdd) {
                   return (
-                     <div key={`carousel-${index}`} className="w-[260px] sm:w-[300px] shrink-0 group relative bg-white overflow-hidden flex flex-col shadow-sm hover:shadow-lg transition-shadow duration-500 border border-[rgba(12,15,13,0.06)]">
-                         <div className="relative w-full aspect-[4/3] bg-[#F9FAFB] p-6 flex items-center justify-center overflow-hidden border-b border-[rgba(12,15,13,0.03)] group-hover:bg-gray-50 transition-colors duration-500">
-                           <div className="relative w-full h-full transform group-hover:scale-105 transition-transform duration-700 ease-out">
-                             <Image src={prod.image} alt={prod.name} fill className="object-contain drop-shadow-md" sizes="(max-width: 768px) 260px, 300px" />
-                           </div>
-                         </div>
-                         <div className="p-6 flex flex-col flex-1 bg-white">
-                           <div className="flex items-start justify-between gap-3 mb-3">
-                             <div className="flex items-center gap-3">
-                               <div className="w-8 h-8 rounded-full flex shrink-0 items-center justify-center bg-[rgba(20,135,142,0.05)] border border-[rgba(20,135,142,0.1)] text-[#14878E] group-hover:bg-[#14878E] group-hover:text-white transition-colors duration-300">
-                                 <Icon size={14} className="text-[inherit]" />
-                               </div>
-                               <h4 className="font-serif text-[17px] sm:text-[18px] font-medium tracking-tight" style={{ color: "#0C0F0D" }}>
-                                 {prod.name}
-                               </h4>
-                             </div>
-                             <ShareButton
-                               shareUrl={`/?commercial=${prod.id}`}
-                               shareTitle={`Skyliqua Commercial - ${prod.name}`}
-                               accentColor="#14878E"
-                               size="sm"
-                               align="left"
-                             />
-                           </div>
-                           <p className="text-[13px] leading-relaxed font-light" style={{ color: "rgba(12,15,13,0.55)" }}>
-                             {prod.description}
-                           </p>
-                         </div>
-                     </div>
+                    <motion.div 
+                      key={prod.id} 
+                      variants={itemVariants}
+                      className="sm:col-span-2 group relative bg-white overflow-hidden flex flex-col sm:flex-row shadow-sm hover:shadow-lg transition-shadow duration-500 border border-[rgba(12,15,13,0.06)] min-h-[180px]"
+                    >
+                      <div 
+                        className="relative w-full sm:w-[45%] aspect-[4/3] sm:aspect-auto bg-[#F9FAFB] p-6 flex items-center justify-center overflow-hidden border-b sm:border-b-0 sm:border-r border-[rgba(12,15,13,0.03)] min-h-[200px] sm:min-h-0 cursor-pointer group/zoom"
+                        onClick={() => setZoomedImage(prod.image)}
+                      >
+                        <div className="relative w-full h-full transform group-hover/zoom:scale-105 transition-transform duration-700 ease-out">
+                          <Image src={prod.image} alt={prod.name} fill className="object-contain drop-shadow-md" sizes="(max-width: 768px) 100vw, 30vw" />
+                        </div>
+                        
+                        {/* Zoom Icon Overlay */}
+                        <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover/zoom:opacity-100 transition-opacity duration-300 bg-black/5 pointer-events-none">
+                          <div className="bg-white/90 backdrop-blur-md p-3 rounded-full shadow-lg border border-black/5">
+                            <ZoomIn size={18} color="#14878E" />
+                          </div>
+                        </div>
+                      </div>
+                      <div className="p-6 flex flex-col justify-center flex-1 bg-white">
+                        <div className="flex items-start justify-between gap-3 mb-3">
+                          <div className="flex items-center gap-3">
+                            <div className="w-8 h-8 rounded-full flex shrink-0 items-center justify-center bg-[rgba(20,135,142,0.05)] border border-[rgba(20,135,142,0.1)] text-[#14878E] group-hover:bg-[#14878E] group-hover:text-white transition-colors duration-300">
+                              <Icon size={14} className="text-[inherit]" />
+                            </div>
+                            <h4 className="font-serif text-[17px] sm:text-[18px] font-medium tracking-tight" style={{ color: "#0C0F0D" }}>
+                              {prod.name}
+                            </h4>
+                          </div>
+                          <ShareButton
+                            shareUrl={`/?commercial=${prod.id}`}
+                            shareTitle={`Skyliqua Commercial - ${prod.name}`}
+                            accentColor="#14878E"
+                            size="sm"
+                            align="left"
+                          />
+                        </div>
+                        <p className="text-[13px] leading-relaxed font-light" style={{ color: "rgba(12,15,13,0.55)" }}>
+                          {prod.description}
+                        </p>
+                      </div>
+                    </motion.div>
                   );
-                })}
-            </motion.div>
+                }
+
+                return (
+                  <motion.div 
+                    key={prod.id} 
+                    variants={itemVariants}
+                    className="group relative bg-white overflow-hidden flex flex-col shadow-sm hover:shadow-lg transition-shadow duration-500 border border-[rgba(12,15,13,0.06)]"
+                  >
+                    <div 
+                      className="relative w-full aspect-[4/3] bg-[#F9FAFB] p-6 flex items-center justify-center overflow-hidden border-b border-[rgba(12,15,13,0.03)] cursor-pointer group/zoom"
+                      onClick={() => setZoomedImage(prod.image)}
+                    >
+                      <div className="relative w-full h-full transform group-hover/zoom:scale-105 transition-transform duration-700 ease-out">
+                        <Image src={prod.image} alt={prod.name} fill className="object-contain drop-shadow-md" sizes="(max-width: 768px) 100vw, 20vw" />
+                      </div>
+                      
+                      {/* Zoom Icon Overlay */}
+                      <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover/zoom:opacity-100 transition-opacity duration-300 bg-black/5 pointer-events-none">
+                        <div className="bg-white/90 backdrop-blur-md p-3 rounded-full shadow-lg border border-black/5">
+                          <ZoomIn size={18} color="#14878E" />
+                        </div>
+                      </div>
+                    </div>
+                    <div className="p-6 flex flex-col flex-1 bg-white">
+                      <div className="flex items-start justify-between gap-3 mb-3">
+                        <div className="flex items-center gap-3">
+                          <div className="w-8 h-8 rounded-full flex shrink-0 items-center justify-center bg-[rgba(20,135,142,0.05)] border border-[rgba(20,135,142,0.1)] text-[#14878E] group-hover:bg-[#14878E] group-hover:text-white transition-colors duration-300">
+                            <Icon size={14} className="text-[inherit]" />
+                          </div>
+                          <h4 className="font-serif text-[17px] sm:text-[18px] font-medium tracking-tight" style={{ color: "#0C0F0D" }}>
+                            {prod.name}
+                          </h4>
+                        </div>
+                        <ShareButton
+                          shareUrl={`/?commercial=${prod.id}`}
+                          shareTitle={`Skyliqua Commercial - ${prod.name}`}
+                          accentColor="#14878E"
+                          size="sm"
+                          align="left"
+                        />
+                      </div>
+                      <p className="text-[13px] leading-relaxed font-light" style={{ color: "rgba(12,15,13,0.55)" }}>
+                        {prod.description}
+                      </p>
+                    </div>
+                  </motion.div>
+                );
+              })}
+            </div>
           </div>
 
         </motion.div>

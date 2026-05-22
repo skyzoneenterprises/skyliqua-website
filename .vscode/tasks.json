@@ -1,0 +1,47 @@
+{
+	"version": "2.0.0",
+	"tasks": [
+		{
+			"label": "copy-product-jpegs",
+			"type": "shell",
+			"command": "cmd",
+			"args": [
+				"/c",
+				"copy",
+				"prime-black.jpeg",
+				"public\\assets\\products\\prime-black.jpeg",
+				"&&",
+				"copy",
+				"zen-white.jpeg",
+				"public\\assets\\products\\zen-white.jpeg",
+				"&&",
+				"copy",
+				"elite-black.jpeg",
+				"public\\assets\\products\\elite-black.jpeg"
+			],
+			"isBackground": false,
+			"group": "build"
+		},
+		{
+			"label": "copy-removebg-product-images",
+			"type": "shell",
+			"command": "cmd",
+			"args": [
+				"/c",
+				"copy",
+				"elite-black-removebg-preview.png",
+				"public\\assets\\products\\elite-black-removebg.png",
+				"&&",
+				"copy",
+				"prime-black-removebg-preview.png",
+				"public\\assets\\products\\prime-black-removebg.png",
+				"&&",
+				"copy",
+				"zen-white-removebg-preview.png",
+				"public\\assets\\products\\zen-white-removebg.png"
+			],
+			"isBackground": false,
+			"group": "build"
+		}
+	]
+}

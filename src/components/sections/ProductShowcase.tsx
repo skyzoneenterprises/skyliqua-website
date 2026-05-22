@@ -12,7 +12,7 @@ const PRODUCTS = [
     tagline: "Pure essentials, beautifully delivered.",
     variants: [
       { name: "Classic White", hex: "#F9FAFB", image: "/assets/products/prime-removed.png" },
-      { name: "Midnight Black", hex: "#1F2937", image: "/assets/prime-color2r.png" }
+      { name: "Midnight Black", hex: "#1F2937", image: "/assets/products/prime-black-removebg.png" }
     ],
     isElite: false, badge: "Best Value", accentColor: "#14878E",
     oval: "radial-gradient(ellipse 85% 80% at 50% 48%, rgba(20,135,142,0.09) 0%, rgba(226,244,242,0.9) 55%, #E8F3F2 100%)",
@@ -25,7 +25,7 @@ const PRODUCTS = [
     tagline: "Balance starts with every sip.",
     variants: [
       { name: "Midnight Black", hex: "#1F2937", image: "/assets/products/zen-removed.png" },
-      { name: "Classic White", hex: "#F9FAFB", image: "/assets/zen-color2r.png" }
+      { name: "Classic White", hex: "#F9FAFB", image: "/assets/products/zen-white-removebg.png" }
     ],
     isElite: false, badge: "Most Popular", accentColor: "#14878E",
     oval: "radial-gradient(ellipse 85% 80% at 50% 48%, rgba(20,135,142,0.09) 0%, rgba(226,244,242,0.9) 55%, #E8F3F2 100%)",
@@ -38,7 +38,7 @@ const PRODUCTS = [
     tagline: "The pinnacle. Nothing held back.",
     variants: [
       { name: "Marble White", hex: "#F9FAFB", image: "/assets/products/elite-removed.png" },
-      { name: "Black Gold", hex: "#111111", image: "/assets/elite-color2r.png" }
+      { name: "Black Gold", hex: "#111111", image: "/assets/products/elite-black-removebg.png" }
     ],
     isElite: true, badge: "Premium", accentColor: "#B68F54",
     oval: "radial-gradient(ellipse 85% 80% at 50% 48%, rgba(182,143,84,0.10) 0%, rgba(248,242,226,0.9) 55%, #F2EBD6 100%)",
@@ -80,6 +80,7 @@ export function ProductShowcase() {
   const p = PRODUCTS.find(x => x.id === activeId)!;
   const activeVariantIndex = selectedVariants[activeId] || 0;
   const currentVariant = p.variants[activeVariantIndex];
+  const isEliteBlack = currentVariant.image.includes("elite-black-removebg");
 
   return (
     <section id="products" className="flex flex-col items-center justify-center py-10 sm:py-14" style={{ background: "#FAFAF8", minHeight: "100dvh" }}>
@@ -154,7 +155,7 @@ export function ProductShowcase() {
                 <motion.div animate={{ y: [0, -8, 0] }} transition={{ duration: 5, repeat: Infinity, ease: "easeInOut" }}
                   whileHover={{ scale: 1.05 }}
                   onClick={() => setZoomedImage(currentVariant.image)}
-                  className="relative w-full max-w-[320px] sm:max-w-[400px] lg:max-w-[460px] aspect-[4/5] cursor-pointer group">
+                  className={`relative w-full max-w-[320px] sm:max-w-[400px] lg:max-w-[460px] aspect-[4/5] cursor-pointer group ${isEliteBlack ? "scale-[0.95] sm:scale-[0.97]" : ""}`}>
 
                   {/* Crossfade when variant changes */}
                   <AnimatePresence mode="wait">

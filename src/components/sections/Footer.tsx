@@ -64,7 +64,7 @@ export function Footer() {
             <div className="text-[10px] font-bold tracking-[0.22em] uppercase mb-5" style={{ color:"rgba(255,255,255,0.3)" }}>Contact</div>
             {[
               { icon:Phone, text:"+91 9483548853" },
-              { icon:Mail,  text:"info@skyliqua.com" },
+              { icon:Mail,  text:"info@skyliqua.in" },
               { icon:MapPin,text:"No.1, 18th Cross, 2nd Block, Akshaya Nagar,\nShani Mahathma Temple Road, Ramamurthy Nagar,\nBengaluru - 560 016, Karnataka, India" },
             ].map(({ icon:Icon, text }) => (
               <div key={text} className="flex items-start gap-3 mb-4">

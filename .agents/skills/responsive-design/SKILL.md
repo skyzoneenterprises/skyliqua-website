@@ -18,6 +18,27 @@ Master modern responsive design techniques to create interfaces that adapt seaml
 - Creating adaptive navigation patterns
 - Building responsive tables and data displays
 
+## Implementation Notes
+
+- Resolved the mobile image rendering bug where the percentage height inside the flex-1 container resolved to zero when the parent lacked an explicit height. Implemented `aspect-[4/3] lg:aspect-auto` on the image container to guarantee that the flagship dispenser image has a perfectly proportioned, fully visible container on mobile/tablet screens while maintaining desktop stretching.
+
+### Interactive Click-to-Zoom Modals
+- Introduced click-to-zoom support for all commercial products, mirroring the premium UX of the residential product showcase.
+- Integrated a modal backdrop with a frosted-glass effect (`backdrop-blur-md bg-black/90`) powered by `AnimatePresence` for fluid entry and exit transitions.
+- Created micro-interactions on the product images:
+  - Hovering displays a luxury, semi-transparent circle containing the `ZoomIn` icon.
+  - The zoom icon color is matched to each card's theme (`#B68F54` for the gold flagship unit, and `#14878E` for teal standard units).
+  - Used Tailwind v4 named groups (`group/zoom`) so that hovering over the image triggers the icon and image zoom independently of the outer card's hover shadows.
+
+## Verification & Testing Results
+
+### 1. Layout Balance & Styling
+- **Bento Grid Alignment**: Left flagship card and right products grid perfectly align at both the top and bottom borders on desktop.
+- **Image Scaling**: The flagship commercial dispenser image is centered and dynamically scaled, presenting a prominent, premium editorial showcase feel.
+- **Micro-Animations**: Hovering over grid cards initiates a smooth `scale-105` image zoom, border highlights, and shadow increases.
+- **Sharing Integration**: Small share buttons are fully integrated into each card, producing absolute link targets matching the query parameters.
+- **Click-to-Zoom Interaction**: Clicking any commercial product image triggers the overlay zoom window with fluid open/close spring animations.
+
 ## Core Capabilities
 
 ### 1. Container Queries
