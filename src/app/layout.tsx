@@ -8,6 +8,10 @@ export const metadata: Metadata = {
   title: "Skyliqua | Premium Water Purifiers",
   description:
     "Experience Puresense Technology — 12-stage water purification enriched with copper and alkaline goodness.",
+  icons: {
+    icon: "/icon.svg",
+    apple: "/icon.svg",
+  },
 };
 
 export default function RootLayout({
